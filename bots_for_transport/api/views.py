@@ -1,3 +1,8 @@
 from django.shortcuts import render
+from rest_framework.viewsets import ModelViewSet
+from bot.models import Bot
 
-# Create your views here.
+
+
+class BotViewSet(ModelViewSet):
+    queryset = Bot,objects.all()
