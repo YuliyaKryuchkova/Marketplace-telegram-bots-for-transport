@@ -27,4 +27,4 @@ class Shopping_cart(models.Model):
         verbose_name_plural = 'Боты в корзине покупок'
 
     def __str__(self):
-        return f'{self.user} добавил "{self.recipe}" в Корзину покупок'
+        return f'{self.user} добавил "{self.bot}" в Корзину покупок'
