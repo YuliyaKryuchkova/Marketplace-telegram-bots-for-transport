@@ -18,9 +18,6 @@ class Shopping_cart(models.Model):
         related_name='in_shopping_cart',
         verbose_name='Владелец корзины покупок',
     )
-    date_added = models.DateTimeField(
-        verbose_name='Дата добавления', auto_now_add=True, editable=False
-    )
 
     class Meta:
         verbose_name = 'Бот в корзине покупок'
