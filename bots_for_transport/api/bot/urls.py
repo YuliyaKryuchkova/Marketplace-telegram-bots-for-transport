@@ -8,7 +8,7 @@ app_name = 'bot'
 router = DefaultRouter()
 
 
-router.register('bot', BotViewSet)
+router.register('bots', BotViewSet, basename='bots')
 
 
 urlpatterns = [

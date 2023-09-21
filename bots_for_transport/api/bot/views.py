@@ -1,6 +1,6 @@
 from rest_framework.viewsets import ModelViewSet
 from .serializers import BotSerializer
-from .models import Bot
+from bot.models import Bot
 
 
 class BotViewSet(ModelViewSet):
