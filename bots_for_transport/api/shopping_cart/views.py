@@ -1,9 +1,9 @@
+from bot.models import Bot
 from django.shortcuts import get_object_or_404
 from rest_framework import status
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from bot.models import Bot
 from shopping_cart.models import Shopping_cart
 from shopping_cart.serializers import Shopping_cartSerializer
 
