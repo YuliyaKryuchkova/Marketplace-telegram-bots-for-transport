@@ -1,4 +1,6 @@
 from django.db import models
+from categories.models import Category
+
 
 
 class Bot(models.Model):
@@ -15,7 +17,7 @@ class Bot(models.Model):
         'Описание'
     )
     category = models.ForeignKey(
-        'Category',
+        Category,
         on_delete=models.SET_NULL,
         verbose_name='Категория',
         null=True,
@@ -29,6 +31,9 @@ class Bot(models.Model):
         ordering = ('name',)
         verbose_name = 'Бот'
         verbose_name_plural = 'Боты'
+
+    def __str__(self):
+        return self.name
 
 
 class Photo(models.Model):
@@ -46,3 +51,6 @@ class Photo(models.Model):
         ordering = ('bot',)
         verbose_name = 'Фото(образцы)'
         verbose_name_plural = 'Фото(образцы)'
+
+    def __str__(self):
+        return f' Фото бота {self.bot}'
