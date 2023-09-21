@@ -1,6 +1,9 @@
 from django.db import models
 from categories.models import Category
+from django.contrib.auth import get_user_model
 
+
+User = get_user_model()
 
 
 class Bot(models.Model):
@@ -9,7 +12,7 @@ class Bot(models.Model):
         max_length=100
     )
     author = models.ForeignKey(
-        'User',
+        User,
         on_delete=models.CASCADE,
         verbose_name='Автор'
     )
