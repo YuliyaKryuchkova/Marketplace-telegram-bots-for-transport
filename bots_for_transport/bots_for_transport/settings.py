@@ -27,6 +27,7 @@ INSTALLED_APPS = [
     'reviews.apps.ReviewsConfig',
     'categories.apps.CategoriesConfig',
     'shopping_cart.apps.Shopping_cartConfig',
+    'favorite.apps.FavoriteConfig',
 ]
 
 MIDDLEWARE = [
