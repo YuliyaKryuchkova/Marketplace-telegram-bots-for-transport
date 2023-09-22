@@ -2,13 +2,11 @@ from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
 SECRET_KEY = 'django-insecure-ftwj&rd_2*a76-j+r^_3$%p456#=8^y(=fh0zmurni0jce$tl-'
 
 DEBUG = True
 
 ALLOWED_HOSTS = []
-
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -24,7 +22,10 @@ INSTALLED_APPS = [
 
     'api.apps.ApiConfig',
     'users.apps.UsersConfig',
-
+    'bot.apps.BotConfig',
+    'reviews.apps.ReviewsConfig',
+    'categories.apps.CategoriesConfig',
+    'shopping_cart.apps.Shopping_cartConfig',
 ]
 
 MIDDLEWARE = [
@@ -57,14 +58,12 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'bots_for_transport.wsgi.application'
 
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -81,7 +80,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 LANGUAGE_CODE = 'ru'
 
 TIME_ZONE = 'Europe/Moscow'
@@ -89,7 +87,6 @@ TIME_ZONE = 'Europe/Moscow'
 USE_I18N = True
 
 USE_TZ = True
-
 
 STATIC_URL = 'static/'
 
@@ -99,9 +96,6 @@ REST_FRAMEWORK = {
     ],
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework.authentication.TokenAuthentication',
-    ],
-    'DEFAULT_FILTER_BACKENDS': [
-        'django_filters.rest_framework.DjangoFilterBackend'
     ],
 }
 
@@ -117,6 +111,5 @@ DJOSER = {
     },
 
 }
-
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
