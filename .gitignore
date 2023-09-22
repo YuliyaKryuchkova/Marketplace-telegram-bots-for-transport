@@ -160,4 +160,4 @@ cython_debug/
 #.idea/
 
 
-bots_for_transport/uploads/
+bots_for_transport/uploads
