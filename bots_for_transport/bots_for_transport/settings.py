@@ -15,10 +15,15 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
     'rest_framework',
+    'rest_framework.authtoken',
+    'djoser',
+
+    'api.apps.ApiConfig',
+    'users.apps.UsersConfig',
     'bot.apps.BotConfig',
     'reviews.apps.ReviewsConfig',
-    'api.apps.ApiConfig',
     'categories.apps.CategoriesConfig',
     'shopping_cart.apps.Shopping_cartConfig',
 ]
@@ -84,5 +89,27 @@ USE_I18N = True
 USE_TZ = True
 
 STATIC_URL = 'static/'
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticatedOrReadOnly',
+    ],
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',
+    ],
+}
+
+DJOSER = {
+    'PERMISSIONS': {
+        'user': ['djoser.permissions.CurrentUserOrAdminOrReadOnly'],
+    },
+    'LOGIN_FIELD': 'email',
+    'SERIALIZERS': {
+        'user_create': 'api.users.serializers.CustomUserCreateSerializer',
+        'user': 'api.users.serializers.CustomUserSerializer',
+        'current_user': 'api.users.serializers.CustomUserSerializer',
+    },
+
+}
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
