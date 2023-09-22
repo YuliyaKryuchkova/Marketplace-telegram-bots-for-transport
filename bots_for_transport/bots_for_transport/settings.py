@@ -23,6 +23,7 @@ INSTALLED_APPS = [
     'api.apps.ApiConfig',
     'users.apps.UsersConfig',
     'bot.apps.BotConfig',
+    'rating.apps.RatingConfig',
     'reviews.apps.ReviewsConfig',
     'categories.apps.CategoriesConfig',
     'shopping_cart.apps.Shopping_cartConfig',
