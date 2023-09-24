@@ -110,6 +110,7 @@ DJOSER = {
         'user_create': 'api.users.serializers.CustomUserCreateSerializer',
         'user': 'api.users.serializers.CustomUserSerializer',
         'current_user': 'api.users.serializers.CustomUserSerializer',
+        'password_reset': 'djoser.serializers.SendEmailResetSerializer',
     },
 
 }

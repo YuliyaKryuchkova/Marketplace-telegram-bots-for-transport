@@ -1,5 +1,7 @@
 from django.contrib.auth import get_user_model
-from djoser.serializers import UserCreateSerializer, UserSerializer
+from djoser.serializers import UserCreateSerializer, UserSerializer, \
+    SendEmailResetSerializer, PasswordResetConfirmSerializer, \
+    SetPasswordSerializer
 from rest_framework import serializers
 
 
@@ -36,3 +38,16 @@ class CustomUserSerializer(UserSerializer):
             'last_name',
         )
 
+
+class PasswordResetSerializer(SendEmailResetSerializer):
+    password_confirm = serializers.CharField()
+    old_password = serializers.CharField(
+        required=False
+    )
+
+    class Meta:
+        model = User
+        fields = (
+            'password_confirm',
+            'old_password'
+        )
