@@ -27,6 +27,10 @@ router_v1.register(
     CustomDjoserUserViewSet,
     basename='users'
 )
+router_v1.register(
+    'bots',
+    BotViewSet,
+    basename='bots')
 
 
 urlpatterns = [
