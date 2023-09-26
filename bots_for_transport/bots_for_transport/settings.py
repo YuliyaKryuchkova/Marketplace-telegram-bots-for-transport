@@ -1,5 +1,6 @@
 import os
 from pathlib import Path
+import os
 
 from environs import Env
 
@@ -21,11 +22,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-
     'rest_framework',
     'rest_framework.authtoken',
     'djoser',
-
+    'django_filters',
     'api.apps.ApiConfig',
     'users.apps.UsersConfig',
     'bot.apps.BotConfig',
@@ -96,11 +96,10 @@ USE_I18N = True
 
 USE_TZ = True
 
-STATIC_URL = 'static/'
 
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.IsAuthenticatedOrReadOnly',
+        'rest_framework.permissions.AllowAny',
     ],
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework.authentication.TokenAuthentication',
@@ -141,3 +140,10 @@ EMAIL_USE_SSL = env.bool("EMAIL_USE_SSL")
 EMAIL_DOMAIN=env("EMAIL_DOMAIN")
 SERVER_EMAIL = f"{EMAIL_HOST_USER}@{EMAIL_DOMAIN}"
 DEFAULT_FROM_EMAIL = f"{EMAIL_HOST_USER}@{EMAIL_DOMAIN}"
+
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, "static")
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
