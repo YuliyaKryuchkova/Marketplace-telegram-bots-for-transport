@@ -5,6 +5,7 @@ from rest_framework.routers import DefaultRouter
 from .bot.views import BotViewSet
 from .categories.views import CategoryViewSet
 from .favorite.views import FavoriteView
+from .rating.views import RatingViewSet
 from .shopping_cart.views import Shopping_cartView
 from .users.views import CustomDjoserUserViewSet
 
@@ -21,6 +22,11 @@ router_v1.register(
     'categories',
     CategoryViewSet,
     basename='categories'
+)
+router_v1.register(
+    r'bots/(?P<bot_id>[^/.]+)/ratings',
+    RatingViewSet,
+    basename='ratings'
 )
 router_v1.register(
     'users',
