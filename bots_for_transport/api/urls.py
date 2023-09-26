@@ -7,7 +7,7 @@ from .categories.views import CategoryViewSet
 from .favorite.views import FavoriteView
 from .rating.views import RatingViewSet
 from .shopping_cart.views import Shopping_cartView
-from .users.views import CustomDjoserUserViewSet
+from .users.views import CustomDjoserUserViewSet, CustomPasswordResetView
 
 app_name = 'api'
 
@@ -38,7 +38,6 @@ router_v1.register(
     BotViewSet,
     basename='bots')
 
-
 urlpatterns = [
     path(
         '',
@@ -58,4 +57,7 @@ urlpatterns = [
         FavoriteView.as_view(),
         name='Favorite'
     ),
+    path('users/reset-password/',
+         CustomPasswordResetView.as_view(),
+         name='password_reset'),
 ]
