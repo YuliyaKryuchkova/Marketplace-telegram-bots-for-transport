@@ -161,3 +161,4 @@ cython_debug/
 
 bots_for_transport/uploads
 
+sent_emails/
