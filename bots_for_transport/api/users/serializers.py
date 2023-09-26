@@ -36,10 +36,3 @@ class CustomUserSerializer(UserSerializer):
             'first_name',
             'last_name',
         )
-
-
-class PasswordResetSerializer(SendEmailResetSerializer):
-    password_confirm = serializers.CharField()
-    old_password = serializers.CharField(
-        required=False
-    )

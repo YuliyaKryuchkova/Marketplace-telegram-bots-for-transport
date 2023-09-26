@@ -39,11 +39,6 @@ urlpatterns = [
         include('djoser.urls.authtoken')
     ),
     path(
-        'password_reset/done/',
-        views.PasswordResetDoneView.as_view(),
-        name='password_reset_done'
-    ),
-    path(
         'bots/<int:id>/shopping_cart/',
         Shopping_cartView.as_view(),
         name='Shopping_cart'
