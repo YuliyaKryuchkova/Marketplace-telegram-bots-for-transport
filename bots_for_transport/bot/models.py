@@ -1,7 +1,6 @@
-from django.db import models
 from categories.models import Category
 from django.contrib.auth import get_user_model
-
+from django.db import models
 
 User = get_user_model()
 
@@ -29,6 +28,15 @@ class Bot(models.Model):
         'Фото',
         upload_to='uploads/main/%Y/%m/%d/',
     )
+    price = models.DecimalField(
+        'Цена',
+        max_digits=8,
+        decimal_places=2
+    )
+    is_special_offer = models.BooleanField(
+        'Спецпредложение',
+        default=False
+    )
 
     class Meta:
         ordering = ('name',)
@@ -47,7 +55,8 @@ class Photo(models.Model):
     bot = models.ForeignKey(
         Bot,
         on_delete=models.CASCADE,
-        verbose_name='Бот'
+        verbose_name='Бот',
+        related_name='photo_examples'
     )
 
     class Meta:

@@ -3,7 +3,6 @@ from djoser.serializers import UserCreateSerializer, UserSerializer, \
     SendEmailResetSerializer
 from rest_framework import serializers
 
-
 User = get_user_model()
 
 
