@@ -9,7 +9,8 @@ class Reviews(models.Model):
     bot = models.ForeignKey(
         Bot,
         on_delete=models.CASCADE,
-        verbose_name='Бот'
+        verbose_name='Бот',
+        related_name='review'
     )
     text = models.TextField(
         'Текст отзыва'

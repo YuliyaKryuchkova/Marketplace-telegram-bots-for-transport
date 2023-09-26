@@ -5,7 +5,7 @@ from rest_framework import filters
 from rest_framework.viewsets import ModelViewSet
 
 from .permissions import IsAuthorOrReadOnly
-from .serializers import BotSerializer
+from .serializers import BotSerializer, BotReviewRatingSerializer
 
 
 class BotViewSet(ModelViewSet):
@@ -16,3 +16,8 @@ class BotViewSet(ModelViewSet):
     search_fields = ('name', 'description')
     permission_classes = (IsAuthorOrReadOnly, )
     filterset_fields = ('category', )
+
+    def get_serializer_class(self):
+        if self.action == 'retrieve':
+            return BotReviewRatingSerializer
+        return self.serializer_class
