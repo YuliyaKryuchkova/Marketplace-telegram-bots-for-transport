@@ -26,6 +26,7 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'djoser',
     'django_filters',
+    'drf_yasg',
     'api.apps.ApiConfig',
     'users.apps.UsersConfig',
     'bot.apps.BotConfig',
@@ -96,7 +97,6 @@ USE_I18N = True
 
 USE_TZ = True
 
-
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.AllowAny',
@@ -137,7 +137,7 @@ EMAIL_PORT = env.int("EMAIL_PORT")
 EMAIL_HOST_USER = env("EMAIL_HOST_USER")
 EMAIL_HOST_PASSWORD = env("EMAIL_HOST_PASSWORD")
 EMAIL_USE_SSL = env.bool("EMAIL_USE_SSL")
-EMAIL_DOMAIN=env("EMAIL_DOMAIN")
+EMAIL_DOMAIN = env("EMAIL_DOMAIN")
 SERVER_EMAIL = f"{EMAIL_HOST_USER}@{EMAIL_DOMAIN}"
 DEFAULT_FROM_EMAIL = f"{EMAIL_HOST_USER}@{EMAIL_DOMAIN}"
 
@@ -146,4 +146,3 @@ STATIC_ROOT = os.path.join(BASE_DIR, "static")
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-
