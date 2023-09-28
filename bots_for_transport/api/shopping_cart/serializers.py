@@ -1,4 +1,4 @@
-from bot.serializers import BotSerializer
+from api.bot.serializers import BotSerializer
 from rest_framework import serializers
 from shopping_cart.models import Shopping_cart
 
