@@ -1,3 +1,4 @@
+from api.pagination import LimitPageNumberPagination
 from bot.models import Bot
 from django.shortcuts import get_object_or_404
 from rest_framework import status
@@ -13,6 +14,17 @@ class Shopping_cartView(APIView):
     """Добавление бота в корзину или его удаление."""
 
     permission_classes = [IsAuthenticated, ]
+    pagination_class = LimitPageNumberPagination
+
+    def get(self, request):
+        """Список корзины покупок пользователя."""
+        user = request.user
+        queryset = Shopping_cart.objects.filter(in__user=user)
+        pages = self.paginate_queryset(queryset)
+        serializer = ShoppingCartSerializer(pages,
+                                            many=True,
+                                            context={'request': request})
+        return self.get_paginated_response(serializer.data)
 
     def post(self, request, id):
         data = {
