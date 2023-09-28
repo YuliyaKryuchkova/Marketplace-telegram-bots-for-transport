@@ -1,5 +1,4 @@
 from api.pagination import LimitPageNumberPagination
-from bot.models import Bot
 from django.shortcuts import get_object_or_404
 from rest_framework import status
 from rest_framework.permissions import IsAuthenticated
@@ -7,7 +6,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from shopping_cart.models import Shopping_cart
 from .serializers import ShoppingCartSerializer
-
+from bot.models import Bot
 
 
 class Shopping_cartView(APIView):
