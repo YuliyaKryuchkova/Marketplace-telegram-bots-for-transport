@@ -8,8 +8,9 @@ from shopping_cart.models import Shopping_cart
 from .serializers import ShoppingCartSerializer
 
 
+
 class Shopping_cartView(APIView):
-    """Добавление рецепта в корзину или его удаление."""
+    """Добавление бота в корзину или его удаление."""
 
     permission_classes = [IsAuthenticated, ]
 
