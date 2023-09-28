@@ -1,3 +1,4 @@
+from api.bot.serializers import BotSerializer
 from bot.serializers import BotSerializer
 from drf_extra_fields.fields import Base64ImageField
 from rest_framework import serializers
