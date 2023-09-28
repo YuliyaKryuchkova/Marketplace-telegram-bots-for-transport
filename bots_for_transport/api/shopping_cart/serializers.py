@@ -1,18 +1,6 @@
-from bot.models import Bot
+from bot.serializers import BotSerializer
 from rest_framework import serializers
 from shopping_cart.models import Shopping_cart
-
-
-class BotShortSerializer(serializers.ModelSerializer):
-
-    class Meta:
-        model = Bot
-        fields = (
-            'id',
-            'name',
-            'image',
-            'price'
-        )
 
 
 class ShoppingCartSerializer(serializers.ModelSerializer):
@@ -23,6 +11,6 @@ class ShoppingCartSerializer(serializers.ModelSerializer):
         fields = ['user', 'bot']
 
     def to_representation(self, instance):
-        return BotShortSerializer(instance.bot, context={
+        return BotSerializer(instance.bot, context={
             'request': self.context.get('request')
         }).data
