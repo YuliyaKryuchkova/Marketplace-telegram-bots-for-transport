@@ -6,7 +6,8 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from shopping_cart.models import Shopping_cart
-from shopping_cart.serializers import ShoppingCartSerializer
+from .serializers import ShoppingCartSerializer
+
 
 
 class Shopping_cartView(APIView):
