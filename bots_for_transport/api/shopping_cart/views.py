@@ -5,11 +5,11 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from shopping_cart.models import Shopping_cart
-from shopping_cart.serializers import Shopping_cartSerializer
+from shopping_cart.serializers import ShoppingCartSerializer
 
 
 class Shopping_cartView(APIView):
-    """Добавление рецепта в корзину или его удаление."""
+    """Добавление бота в корзину или его удаление."""
 
     permission_classes = [IsAuthenticated, ]
 
@@ -21,7 +21,7 @@ class Shopping_cartView(APIView):
         bot = get_object_or_404(Bot, id=id)
         if not Shopping_cart.objects.filter(
            user=request.user, bot=bot).exists():
-            serializer = Shopping_cartSerializer(
+            serializer = ShoppingCartSerializer(
                 data=data, context={'request': request}
             )
             if serializer.is_valid():
