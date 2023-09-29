@@ -37,9 +37,9 @@ class FavoriteView(APIView):
         return Response(serializer.data, status=status.HTTP_201_CREATED)
 
     def delete(self, request, id):
-        shopping_cart = Favorite.objects.filter(
+        favorite = Favorite.objects.filter(
             user=request.user.id,
             bot=get_object_or_404(Bot, id=id)
         )
-        shopping_cart.delete()
+        favorite.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
