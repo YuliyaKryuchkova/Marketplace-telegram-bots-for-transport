@@ -63,6 +63,11 @@ urlpatterns = [
         FavoriteView.as_view(),
         name='Favorite'
     ),
+    path(
+        'users/<int:id>/favorite/',
+        FavoriteListView.as_view(),
+        name='Favorite'
+    ),
     path('users/reset-password/',
          CustomPasswordResetView.as_view(),
          name='password_reset'),
