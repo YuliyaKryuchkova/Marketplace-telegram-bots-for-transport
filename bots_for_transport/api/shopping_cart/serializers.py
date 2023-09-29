@@ -6,10 +6,6 @@ from shopping_cart.models import Shopping_cart
 
 class ShoppingCartSerializer(serializers.ModelSerializer):
     """Сериализатор для корзины покупок."""
-    id = serializers.IntegerField()
-    name = serializers.StringRelatedField(read_only=True)
-    image = Base64ImageField()
-    price = serializers.IntegerField()
 
     class Meta:
         model = Shopping_cart
@@ -19,3 +15,11 @@ class ShoppingCartSerializer(serializers.ModelSerializer):
         return BotSerializer(instance.bot, context={
             'request': self.context.get('request')
         }).data
+
+
+class ShoppingCartListSerializer(serializers.ModelSerializer):
+    bot = BotSerializer()
+
+    class Meta:
+        model = Shopping_cart
+        fields = '__all__'
