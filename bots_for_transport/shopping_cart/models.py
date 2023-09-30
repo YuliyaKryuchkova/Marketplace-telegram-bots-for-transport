@@ -34,4 +34,4 @@ class Shopping_cart(models.Model):
         ]
 
     def __str__(self):
-        return f'{self.bot} - {self.user}'
+        return f'{self.user} добавил "{self.bot}" в Корзину покупок'
