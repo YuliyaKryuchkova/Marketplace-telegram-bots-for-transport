@@ -31,7 +31,7 @@ class ShoppingCartListView(ListAPIView):
             Shopping_cart.objects
             .filter(bot__in_shopping_cart__user=request.user)
             .values('bot__name')
-            .annotate(price__sum=Sum('price'))
+            .annotate(price=Sum('price'))
             .order_by('bot__name')
         )
         return self.message_shopping_cart(bot)
