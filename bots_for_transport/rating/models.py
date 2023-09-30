@@ -1,7 +1,9 @@
-from bot.models import Bot
 from django.contrib.auth import get_user_model
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
+
+from bot.models import Bot
+
 
 User = get_user_model()
 

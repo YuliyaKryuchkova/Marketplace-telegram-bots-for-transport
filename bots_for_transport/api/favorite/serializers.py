@@ -1,10 +1,11 @@
-from api.bot.serializers import BotSerializer
 from rest_framework import serializers
+
+from api.bot.serializers import BotSerializer
 from favorite.models import Favorite
 
 
 class FavoriteSerializer(serializers.ModelSerializer):
-    
+
     class Meta:
         model = Favorite
         fields = ['user', 'bot']
@@ -21,7 +22,6 @@ class FavoriteSerializer(serializers.ModelSerializer):
         return BotSerializer(instance.bot, context={
             'request': self.context.get('request')
         }).data
-
 
 
 class FavoriteListSerializer(serializers.ModelSerializer):

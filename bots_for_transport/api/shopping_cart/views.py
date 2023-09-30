@@ -1,14 +1,14 @@
 from api.pagination import LimitPageNumberPagination
-from django.db.models import Sum
+from bot.models import Bot
 from django.shortcuts import get_object_or_404
 from rest_framework import status
 from rest_framework.generics import ListAPIView
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
+
 from shopping_cart.models import Shopping_cart
-from .serializers import ShoppingCartSerializer, ShoppingCartListSerializer
-from bot.models import Bot
+from .serializers import ShoppingCartListSerializer, ShoppingCartSerializer
 
 
 class ShoppingCartListView(ListAPIView):
@@ -17,24 +17,6 @@ class ShoppingCartListView(ListAPIView):
     def get_queryset(self):
         user = self.request.user.id
         return Shopping_cart.objects.filter(user=user)
-
-    def message_shopping_cart(self, bots):
-        shopping_list = 'Сумма к оплате:'
-        for bot in bots:
-            shopping_list += (
-                f"\n{bot['bot__name']} {bot['price__sum']}"
-            )
-        return shopping_list
-
-    def shopping_cart(self, request):
-        bot = (
-            Shopping_cart.objects
-            .filter(bot__in_shopping_cart__user=request.user)
-            .values('bot__name')
-            .annotate(price=Sum('price'))
-            .order_by('bot__name')
-        )
-        return self.message_shopping_cart(bot)
 
 
 class AddAndDeleteShoppingCartView(APIView):
