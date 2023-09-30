@@ -4,7 +4,7 @@ from rest_framework.routers import DefaultRouter
 
 from .bot.views import BotViewSet
 from .categories.views import CategoryViewSet
-from .favorite.views import FavoriteView
+from .favorite.views import FavoriteView, FavoriteListView
 from .rating.views import RatingViewSet
 from .shopping_cart.views import AddAndDeleteShoppingCartView, \
     ShoppingCartListView

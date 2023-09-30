@@ -11,7 +11,7 @@ class FavoriteSerializer(serializers.ModelSerializer):
 
     def validate(self, data):
         user = data['user']
-        if user.in_favorite.filter(bot=data['bot']).exists():
+        if user.favorites.filter(bot=data['bot']).exists():
             raise serializers.ValidationError(
                 'Этот Bot уже находится в списке избранного.'
             )
