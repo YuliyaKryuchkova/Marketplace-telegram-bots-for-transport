@@ -1,6 +1,8 @@
-from categories.models import Category
 from django.contrib.auth import get_user_model
 from django.db import models
+
+from categories.models import Category
+
 
 User = get_user_model()
 
