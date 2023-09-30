@@ -1,7 +1,6 @@
-from django.db import models
 from bot.models import Bot
 from django.contrib.auth import get_user_model
-
+from django.db import models
 
 User = get_user_model()
 
@@ -10,7 +9,8 @@ class Reviews(models.Model):
     bot = models.ForeignKey(
         Bot,
         on_delete=models.CASCADE,
-        verbose_name='Бот'
+        verbose_name='Бот',
+        related_name='review'
     )
     text = models.TextField(
         'Текст отзыва'

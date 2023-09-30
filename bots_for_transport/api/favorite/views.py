@@ -18,7 +18,6 @@ class FavoriteListView(ListAPIView):
         return Favorite.objects.filter(user=user)
 
 
-
 class FavoriteView(APIView):
 
     permission_classes = [IsAuthenticated, ]

@@ -19,14 +19,13 @@ class User(models.Model):
                       "пользователя уже существует.",
         },
     )
-
-    first_name = models.CharField(
-        'Имя',
-        max_length=150
+    password = models.CharField(
+        verbose_name='Пароль',
+        max_length=128
     )
-    last_name = models.CharField(
-        'Фамилия',
-        max_length=150
+    confirm_password = models.CharField(
+        verbose_name='Повторите пароль',
+        max_length=128
     )
 
     class Meta:
@@ -34,7 +33,7 @@ class User(models.Model):
         verbose_name_plural = 'Пользователи'
 
     def __str__(self):
-        return f'{self.first_name} {self.last_name}'
+        return self.username
 
     def clean(self):
         super().clean()
