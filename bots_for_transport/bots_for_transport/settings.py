@@ -125,9 +125,9 @@ DJOSER = {
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+# --------------------------------------------------------------
 # почта
 #  подключаем движок filebased.EmailBackend
-
 EMAIL_BACKEND = env("EMAIL_BACKEND")
 # указываем директорию, в которую будут складываться файлы писем
 EMAIL_FILE_PATH = os.path.join(BASE_DIR, 'sent_emails')
@@ -140,7 +140,6 @@ EMAIL_USE_SSL = env.bool("EMAIL_USE_SSL")
 EMAIL_DOMAIN = env("EMAIL_DOMAIN")
 SERVER_EMAIL = f"{EMAIL_HOST_USER}@{EMAIL_DOMAIN}"
 DEFAULT_FROM_EMAIL = f"{EMAIL_HOST_USER}@{EMAIL_DOMAIN}"
-
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, "static")
