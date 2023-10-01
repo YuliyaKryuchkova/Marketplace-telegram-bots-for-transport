@@ -1,10 +1,9 @@
 from django.db.models import Avg
-
-from bot.models import Bot, Photo
 from drf_extra_fields.fields import Base64ImageField
 from rest_framework import serializers
-from api.rating.serializers import RatingSerializer
+
 from api.reviews.serializers import ReviewsSerializer
+from bot.models import Bot, Photo
 
 
 class PhotoSerializer(serializers.ModelSerializer):

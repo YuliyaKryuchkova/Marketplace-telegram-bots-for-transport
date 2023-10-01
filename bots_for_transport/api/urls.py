@@ -1,12 +1,12 @@
-from django.contrib.auth import views
 from django.urls import include, path
 from rest_framework.routers import DefaultRouter
 
 from .bot.views import BotViewSet
 from .categories.views import CategoryViewSet
-from .favorite.views import FavoriteView
+from .favorite.views import FavoriteView, FavoriteListView
 from .rating.views import RatingViewSet
-from .shopping_cart.views import Shopping_cartView
+from .shopping_cart.views import AddAndDeleteShoppingCartView, \
+    ShoppingCartListView
 from .users.views import CustomDjoserUserViewSet, CustomPasswordResetView
 
 app_name = 'api'
@@ -49,12 +49,22 @@ urlpatterns = [
     ),
     path(
         'bots/<int:id>/shopping_cart/',
-        Shopping_cartView.as_view(),
+        AddAndDeleteShoppingCartView.as_view(),
+        name='Shopping_cart'
+    ),
+    path(
+        'users/<int:id>/shopping_cart/',
+        ShoppingCartListView.as_view(),
         name='Shopping_cart'
     ),
     path(
         'bots/<int:id>/favorite/',
         FavoriteView.as_view(),
+        name='Favorite'
+    ),
+    path(
+        'users/<int:id>/favorite/',
+        FavoriteListView.as_view(),
         name='Favorite'
     ),
     path('users/reset-password/',
