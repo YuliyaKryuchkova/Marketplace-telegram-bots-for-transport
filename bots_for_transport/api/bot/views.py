@@ -4,7 +4,7 @@ from rest_framework.viewsets import ModelViewSet
 
 from api.pagination import LimitPageNumberPagination
 from bot.models import Bot
-from .permissions import IsAuthorOrReadOnly
+from api.permissions import IsAuthorOrReadOnly
 from .serializers import BotReviewRatingSerializer, BotSerializer
 
 

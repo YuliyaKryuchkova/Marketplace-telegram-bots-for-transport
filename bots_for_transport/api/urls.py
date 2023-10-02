@@ -53,7 +53,7 @@ urlpatterns = [
         name='Shopping_cart'
     ),
     path(
-        'users/<int:id>/shopping_cart/',
+        'users/<int:pk>/shopping_cart/',
         ShoppingCartListView.as_view(),
         name='Shopping_cart'
     ),
