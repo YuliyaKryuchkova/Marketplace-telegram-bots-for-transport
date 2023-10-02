@@ -6,7 +6,7 @@ from .categories.views import CategoryViewSet
 from .favorite.views import FavoriteView, FavoriteListView
 from .rating.views import RatingViewSet
 from .shopping_cart.views import AddAndDeleteShoppingCartView, \
-    ShoppingCartListView
+    ShoppingCartRetrieveView
 from .users.views import CustomDjoserUserViewSet, CustomPasswordResetView
 
 app_name = 'api'
@@ -54,7 +54,7 @@ urlpatterns = [
     ),
     path(
         'users/<int:pk>/shopping_cart/',
-        ShoppingCartListView.as_view(),
+        ShoppingCartRetrieveView.as_view(),
         name='Shopping_cart'
     ),
     path(
