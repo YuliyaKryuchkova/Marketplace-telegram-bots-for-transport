@@ -1,22 +1,21 @@
 from api.pagination import LimitPageNumberPagination
-from bot.models import Bot
+from bot.models import Bot, User
 from django.shortcuts import get_object_or_404
 from rest_framework import status
-from rest_framework.generics import ListAPIView
+from rest_framework.generics import ListAPIView, RetrieveAPIView
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
+from api.permissions import IsOwner
 from shopping_cart.models import Shopping_cart
 from .serializers import ShoppingCartListSerializer, ShoppingCartSerializer
 
 
-class ShoppingCartListView(ListAPIView):
+class ShoppingCartListView(RetrieveAPIView):
     serializer_class = ShoppingCartListSerializer
-
-    def get_queryset(self):
-        user = self.request.user.id
-        return Shopping_cart.objects.filter(user=user)
+    queryset = User.objects.all()
+    permission_classes = (IsAuthenticated, IsOwner)
 
 
 class AddAndDeleteShoppingCartView(APIView):
