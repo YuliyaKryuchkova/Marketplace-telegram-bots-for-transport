@@ -27,7 +27,7 @@ class ShoppingCartSerializer(serializers.ModelSerializer):
         }).data
 
 
-class ShoppingCartListSerializer(serializers.ModelSerializer):
+class ShoppingCartRetrieveSerializer(serializers.ModelSerializer):
     bot = serializers.SerializerMethodField()
     sum_price = serializers.SerializerMethodField()
 

@@ -9,11 +9,11 @@ from rest_framework.views import APIView
 
 from api.permissions import IsOwner
 from shopping_cart.models import Shopping_cart
-from .serializers import ShoppingCartListSerializer, ShoppingCartSerializer
+from .serializers import ShoppingCartRetrieveSerializer, ShoppingCartSerializer
 
 
-class ShoppingCartListView(RetrieveAPIView):
-    serializer_class = ShoppingCartListSerializer
+class ShoppingCartRetrieveView(RetrieveAPIView):
+    serializer_class = ShoppingCartRetrieveSerializer
     queryset = User.objects.all()
     permission_classes = (IsAuthenticated, IsOwner)
 
