@@ -1,13 +1,14 @@
-from bot.models import Bot
+from bot.models import Bot, User
 from django.shortcuts import get_object_or_404
 from rest_framework import status
-from rest_framework.generics import ListAPIView
+from rest_framework.generics import ListAPIView, RetrieveAPIView
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from favorite.models import Favorite
 from favorite.serializers import FavoriteSerializer, FavoriteListSerializer
 from api.pagination import LimitPageNumberPagination
+from .serializers import FavoriteSerializer
 
 
 class FavoriteListView(ListAPIView):
@@ -17,6 +18,11 @@ class FavoriteListView(ListAPIView):
         user = self.request.user.id
         return Favorite.objects.filter(user=user)
 
+
+class FavoriteRetrieveSerializer(RetrieveAPIView):
+    serializer_class = FavoriteSerializer
+    queryset = User.objects.all()
+    permission_classes = (IsAuthenticated,)
 
 
 class FavoriteView(APIView):
