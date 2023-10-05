@@ -34,7 +34,7 @@ class FavoriteRetrieveSerializer(serializers.ModelSerializer):
         exclude = ('confirm_password', 'email', 'password')
 
     def get_bot(self, obj):
-        return obj.in_favorite.all().values('bot__name', 'bot__price')
+        return obj.favorites.all().values('bot__name', 'bot__price')
 
 
 
