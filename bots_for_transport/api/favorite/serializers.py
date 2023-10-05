@@ -2,6 +2,7 @@ from rest_framework import serializers
 
 from api.bot.serializers import BotSerializer
 from favorite.models import Favorite
+from users.models import User
 
 
 class FavoriteSerializer(serializers.ModelSerializer):
@@ -22,6 +23,19 @@ class FavoriteSerializer(serializers.ModelSerializer):
         return BotSerializer(instance.bot, context={
             'request': self.context.get('request')
         }).data
+
+
+
+class FavoriteRetrieveSerializer(serializers.ModelSerializer):
+    bot = serializers.SerializerMethodField()
+
+    class Meta:
+        model = User
+        exclude = ('confirm_password', 'email', 'password')
+
+    def get_bot(self, obj):
+        return obj.in_favorite.all().values('bot__name', 'bot__price')
+
 
 
 class FavoriteListSerializer(serializers.ModelSerializer):
