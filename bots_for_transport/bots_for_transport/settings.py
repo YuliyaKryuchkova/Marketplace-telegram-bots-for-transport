@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     'categories.apps.CategoriesConfig',
     'shopping_cart.apps.Shopping_cartConfig',
     'favorite.apps.FavoriteConfig',
+    'django_extensions'
 ]
 
 MIDDLEWARE = [
