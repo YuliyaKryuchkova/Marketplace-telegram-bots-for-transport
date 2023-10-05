@@ -1,13 +1,12 @@
-from django.contrib.auth import views
 from django.urls import include, path
 from rest_framework.routers import DefaultRouter
 
 from .bot.views import BotViewSet
 from .categories.views import CategoryViewSet
-from .favorite.views import FavoriteView
+from .favorite.views import FavoriteView, FavoriteListView
 from .rating.views import RatingViewSet
 from .shopping_cart.views import AddAndDeleteShoppingCartView, \
-    ShoppingCartListView
+    ShoppingCartRetrieveView
 from .users.views import CustomDjoserUserViewSet, CustomPasswordResetView
 
 app_name = 'api'
@@ -54,8 +53,8 @@ urlpatterns = [
         name='Shopping_cart'
     ),
     path(
-        'users/<int:id>/shopping_cart/',
-        ShoppingCartListView.as_view(),
+        'users/<int:pk>/shopping_cart/',
+        ShoppingCartRetrieveView.as_view(),
         name='Shopping_cart'
     ),
     path(

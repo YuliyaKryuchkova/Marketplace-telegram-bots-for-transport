@@ -1,18 +1,19 @@
-from api.bot.serializers import BotSerializer
 from rest_framework import serializers
+
+from api.bot.serializers import BotSerializer
 from favorite.models import Favorite
 from users.models import User
 
 
 class FavoriteSerializer(serializers.ModelSerializer):
-    
+
     class Meta:
         model = Favorite
         fields = ['user', 'bot']
 
     def validate(self, data):
         user = data['user']
-        if user.in_favorite.filter(bot=data['bot']).exists():
+        if user.favorites.filter(bot=data['bot']).exists():
             raise serializers.ValidationError(
                 'Этот Bot уже находится в списке избранного.'
             )
@@ -24,6 +25,7 @@ class FavoriteSerializer(serializers.ModelSerializer):
         }).data
 
 
+
 class FavoriteRetrieveSerializer(serializers.ModelSerializer):
     bot = serializers.SerializerMethodField()
 
@@ -33,6 +35,7 @@ class FavoriteRetrieveSerializer(serializers.ModelSerializer):
 
     def get_bot(self, obj):
         return obj.in_favorite.all().values('bot__name', 'bot__price')
+
 
 
 class FavoriteListSerializer(serializers.ModelSerializer):

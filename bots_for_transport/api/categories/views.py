@@ -1,6 +1,6 @@
-from categories.models import Category
 from rest_framework.viewsets import ReadOnlyModelViewSet
 
+from categories.models import Category
 from .serializers import CategorySerializer
 
 
