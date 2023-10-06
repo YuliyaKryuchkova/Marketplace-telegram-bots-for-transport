@@ -7,8 +7,8 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from favorite.models import Favorite
 from .serializers import FavoriteListSerializer
+
 from api.pagination import LimitPageNumberPagination
-from .serializers import FavoriteSerializer
 
 
 class FavoriteListView(ListAPIView):
