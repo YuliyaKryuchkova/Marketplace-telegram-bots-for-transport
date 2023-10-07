@@ -25,7 +25,6 @@ class FavoriteSerializer(serializers.ModelSerializer):
         }).data
 
 
-
 class FavoriteRetrieveSerializer(serializers.ModelSerializer):
     bot = serializers.SerializerMethodField()
 
@@ -35,7 +34,6 @@ class FavoriteRetrieveSerializer(serializers.ModelSerializer):
 
     def get_bot(self, obj):
         return obj.favorites.all().values('bot__name', 'bot__price')
-
 
 
 class FavoriteListSerializer(serializers.ModelSerializer):
