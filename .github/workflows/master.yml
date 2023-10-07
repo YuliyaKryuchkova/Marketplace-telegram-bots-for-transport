@@ -3,7 +3,7 @@ name: Main bots_for_transport workflow
 on:
   push:
     branches:
-      - master
+      - develop
 
 jobs:
   tests:
