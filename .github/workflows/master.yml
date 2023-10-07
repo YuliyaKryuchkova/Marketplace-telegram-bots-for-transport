@@ -94,7 +94,6 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           passphrase: ${{ secrets.SSH_PASSPHRASE }}
           script: |
-            cd backend
             cd infra
             sudo docker compose -f docker-compose.production.yml down
             sudo docker image rm yuliyakryuchkova/bots_for_transport_backend
