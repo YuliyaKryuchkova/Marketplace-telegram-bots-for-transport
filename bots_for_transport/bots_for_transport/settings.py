@@ -1,4 +1,3 @@
-import os
 from pathlib import Path
 import os
 
@@ -70,17 +69,13 @@ WSGI_APPLICATION = 'bots_for_transport.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': os.getenv('DB_ENGINE'),
-        'NAME': os.getenv('DB_NAME'),
-        'USER': os.getenv('POSTGRES_USER'),
-        'PASSWORD': os.getenv('POSTGRES_PASSWORD'),
-        'HOST': os.getenv('DB_HOST'),
-        'PORT': os.getenv('DB_PORT')
+        'ENGINE': env('DB_ENGINE', 'django.db.backends.sqlite3'),
+        'NAME': env('POSTGRES_DB', 'db.sqlite3'),
+        'USER': env('POSTGRES_USER', 'django'),
+        'PASSWORD': env('POSTGRES_PASSWORD', ''),
+        'HOST': env('DB_HOST', ''),
+        'PORT': env('DB_PORT', 5432)
     }
-    # 'default': {
-    #     'ENGINE': 'django.db.backends.sqlite3',
-    #     'NAME': BASE_DIR / 'db.sqlite3',
-    # }
 }
 
 AUTH_PASSWORD_VALIDATORS = [
