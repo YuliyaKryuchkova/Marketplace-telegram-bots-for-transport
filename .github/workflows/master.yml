@@ -32,6 +32,13 @@ jobs:
         pip install -r ./bots_for_transport/requirements.txt
     - name: Test with flake8 and django tests
       env:
+        EMAIL_BACKEND: django.core.mail.backends.smtp.EmailBackend
+        EMAIL_DOMAIN: django_email_domain
+        EMAIL_HOST: django_email_host
+        EMAIL_PORT: 465
+        EMAIL_HOST_USER: django_email_host_user
+        EMAIL_HOST_PASSWORD: django_email_password
+        EMAIL_USE_SSL: true
         DB_ENGINE: django.db.backends.postgresql
         POSTGRES_USER: django_user
         POSTGRES_PASSWORD: django_password
