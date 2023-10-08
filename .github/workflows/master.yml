@@ -68,7 +68,7 @@ jobs:
         with:
           context: ./bots_for_transport/
           push: true
-          tags: ${{ secrets.DOCKER_USERNAME }}/bots_for_transport_backend:latest
+          tags: ${{ secrets.DOCKER_USERNAME }}/bots_for_transport_backend
 
   deploy:
     runs-on: ubuntu-latest
