@@ -9,11 +9,11 @@ services:
     volumes:
       - db_data:/var/lib/postgresql/data/
     env_file:
-      - ../.env
+      - ./.env
 
   backend:
     build:
-      context: .
+      context: ..
       dockerfile: Dockerfile
     restart: always
     volumes:
@@ -22,7 +22,7 @@ services:
     depends_on:
       - db
     env_file:
-      - ../.env
+      - ./.env
 
 
   nginx:
