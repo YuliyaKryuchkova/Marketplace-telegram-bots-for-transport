@@ -1,29 +1,25 @@
 version: '3.8'
 
+volumes:
+  pg_data:
+  static:
+  media:
+
 services:
-
-
   db:
-    image: postgres:13.0-alpine
-    restart: always
+    env_file: .env
+    image: postgres:13
     volumes:
-      - db_data:/var/lib/postgresql/data/
-    env_file:
-      - ../.env
+      - pg_data:/var/lib/postgresql/data
 
   backend:
-    build: 
-      context: ..
-      dockerfile: Dockerfile
-    restart: always
-    volumes:
-      - static_value:/app/static/
-      - media_value:/app/media/
     depends_on:
       - db
-    env_file:
-      - ../.env
-    container_name: backend
+    build: ./bots_for_transport/
+    env_file: .env
+    volumes:
+      - static:/app/static
+      - media:/app/media
 
 
   nginx:
@@ -35,14 +31,3 @@ services:
       - static_value:/var/html/static/
       - media_value:/var/html/media/
       - ../docs/:/usr/share/nginx/html/api/docs/
-    depends_on:
-      - backend
-
-volumes:
-  static_value:
-  media_value:
-  db_data:
-
-
-
-
