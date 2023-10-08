@@ -15,7 +15,7 @@ services:
   backend:
     depends_on:
       - db
-    image: yuliyakryuchkova/bots_for_transport_backend
+    image: yuliyakryuchkova/bots_for_transport_backend:latest
     env_file: .env
     volumes:
       - static:/app/static
