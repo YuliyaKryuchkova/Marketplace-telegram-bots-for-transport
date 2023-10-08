@@ -83,7 +83,7 @@ jobs:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USER }}
           password: ${{ secrets.SSH_PASSWORD }}
-          source: "infra/docker-compose.production.yml"
+          # source: "infra/docker-compose.production.yml"
           target: "bots_for_transport"
       - name: Executing remote ssh commands to deploy
         uses: appleboy/ssh-action@master
