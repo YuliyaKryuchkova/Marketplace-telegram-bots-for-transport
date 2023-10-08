@@ -92,6 +92,7 @@ jobs:
           username: ${{ secrets.USER }}
           password: ${{ secrets.SSH_PASSWORD }}
           script: |
+            cd bots_for_transport
             cd infra
             sudo docker-compose -f docker-compose.production.yml down
             sudo docker-compose -f docker-compose.production.yml up -d
