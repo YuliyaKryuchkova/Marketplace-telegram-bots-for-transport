@@ -1,3 +1,40 @@
+<<<<<<< HEAD
+#version: '3.8'
+#
+#volumes:
+#  static_value:
+#  media_value:
+#  db_data:
+#
+#services:
+#  db:
+#    env_file: ./.env
+#    image: postgres:130-alpine
+#    restart: always
+#    volumes:
+#      - db_data:/var/lib/postgresql/data/
+#
+#  backend:
+#    depends_on:
+#      - db
+#    image: yuliyakryuchkova/bots_for_transport_backend:latest
+#    env_file: ./.env
+#    volumes:
+#      - static_value:/app/static/
+#      - media_value:/app/media/
+#
+#  nginx:
+#    image: nginx:1.19.3
+#    ports:
+#      - "80:80"
+#    volumes:
+#      - ./nginx.conf:/etc/nginx/conf.d/default.conf
+#      - static_value:/var/html/static/
+#      - media_value:/var/html/media/
+#      - ../docs/:/usr/share/nginx/html/api/docs/
+#    depends_on:
+#      - backend
+=======
 version: '3.8'
 
 volumes:
@@ -34,3 +71,4 @@ services:
       - ../docs/:/usr/share/nginx/html/api/docs/
     depends_on:
       - backend
+>>>>>>> de6afb379c9cca1733e7fc97aa3995811d4d029d

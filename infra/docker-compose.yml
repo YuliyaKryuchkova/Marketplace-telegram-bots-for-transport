@@ -12,6 +12,7 @@ services:
       - ./.env
 
   backend:
+    image: yuliyakryuchkova/bots_for_transport_backend:latest
     build:
       context: ..
       dockerfile: Dockerfile
