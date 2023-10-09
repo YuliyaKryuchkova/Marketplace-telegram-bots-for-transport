@@ -94,8 +94,8 @@ jobs:
           script: |
             cd bots_for_transport
             cd infra
-            sudo docker-compose -f docker-compose.production.yml down
-            sudo docker-compose -f docker-compose.production.yml up -d
-            sudo docker-compose -f docker-compose.production.yml exec backend python manage.py migrate
-            sudo docker-compose -f docker-compose.production.yml exec backend python manage.py collectstatic --noinput
+            sudo docker compose -f docker-compose.production.yml down
+            sudo docker compose -f docker-compose.production.yml up -d
+            sudo docker compose -f docker-compose.production.yml exec backend python manage.py migrate
+            sudo docker compose -f docker-compose.production.yml exec backend python manage.py collectstatic --noinput
             sudo docker system prune -af
