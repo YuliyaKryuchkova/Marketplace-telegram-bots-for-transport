@@ -16,9 +16,6 @@ ALLOWED_HOSTS = env.list(
     'ALLOWED_HOSTS',
     '127.0.0.1',
     'localhost',
-    'backend',
-    'web',
-    '80.87.96.7'
 )
 
 INSTALLED_APPS = [
