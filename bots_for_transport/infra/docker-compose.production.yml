@@ -16,6 +16,7 @@ services:
     depends_on:
       - db
     image: yuliyakryuchkova/bots_for_transport_backend:latest
+    restart: always
     env_file: .env
     volumes:
       - static:/app/static
