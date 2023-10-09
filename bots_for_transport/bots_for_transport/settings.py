@@ -4,7 +4,7 @@ import os
 from environs import Env
 
 env = Env()
-env.read_env()  # read .env file, if it exists
+env.read_env()
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
