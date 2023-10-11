@@ -72,6 +72,9 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'bots_for_transport.wsgi.application'
 
+AUTH_USER_MODEL = 'users.User'
+
+
 DATABASES = {
     'default': {
         'ENGINE': env('DB_ENGINE', 'django.db.backends.sqlite3'),

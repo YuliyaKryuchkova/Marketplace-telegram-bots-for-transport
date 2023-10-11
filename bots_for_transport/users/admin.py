@@ -4,6 +4,7 @@ from django.contrib.auth import get_user_model
 User = get_user_model()
 
 
+@admin.register(User)
 class UserAdmin(admin.ModelAdmin):
     fieldsets = (
         (
@@ -48,5 +49,5 @@ class UserAdmin(admin.ModelAdmin):
     empty_value_display = '-пусто-'
 
 
-admin.site.unregister(User)
-admin.site.register(User, UserAdmin)
+# admin.site.unregister(User)
+# admin.site.register(User, UserAdmin)
