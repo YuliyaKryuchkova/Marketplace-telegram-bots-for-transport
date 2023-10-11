@@ -1,9 +1,10 @@
+from django.contrib.auth.models import AbstractUser
 from django.contrib.auth.validators import UnicodeUsernameValidator
 from django.core.exceptions import ValidationError
 from django.db import models
 
 
-class User(models.Model):
+class User(AbstractUser):
     email = models.EmailField(
         'Email',
         max_length=200,
