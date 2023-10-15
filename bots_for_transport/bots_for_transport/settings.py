@@ -14,6 +14,8 @@ DEBUG = env.bool('DEBUG', True)
 
 ALLOWED_HOSTS = ['ALLOWED_HOSTS', '*']
 
+CORS_ORIGIN_ALLOW_ALL = True
+
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -34,12 +36,14 @@ INSTALLED_APPS = [
     'categories.apps.CategoriesConfig',
     'shopping_cart.apps.Shopping_cartConfig',
     'favorite.apps.FavoriteConfig',
-    'django_extensions'
+    'django_extensions',
+    'corsheaders'
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -68,7 +72,6 @@ TEMPLATES = [
 WSGI_APPLICATION = 'bots_for_transport.wsgi.application'
 
 AUTH_USER_MODEL = 'users.User'
-
 
 DATABASES = {
     'default': {
@@ -117,7 +120,7 @@ REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework.authentication.TokenAuthentication',
     ],
-    'CORS_ORIGIN_ALLOW_ALL': True,
+    # 'CORS_ORIGIN_ALLOW_ALL': True,
 }
 
 DJOSER = {
