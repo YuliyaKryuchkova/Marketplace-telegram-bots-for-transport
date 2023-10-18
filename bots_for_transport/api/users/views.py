@@ -10,4 +10,4 @@ class CustomDjoserUserViewSet(UserViewSet):
 
 
 class CustomPasswordResetView(PasswordResetView):
-    pass
+    template_name = 'registration / password_reset_form.html '
