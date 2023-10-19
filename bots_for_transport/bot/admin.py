@@ -13,6 +13,7 @@ class BotAdmin(admin.ModelAdmin):
         PhotoAdmin,
     ]
 
+
 class CategoryBotAdmin(admin.ModelAdmin):
     model = CategoryBot
 
