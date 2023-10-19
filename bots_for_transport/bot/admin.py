@@ -17,7 +17,5 @@ class CategoryBotAdmin(admin.ModelAdmin):
     model = CategoryBot
 
 
-
-
 admin.site.register(Bot, BotAdmin)
 admin.site.register(CategoryBot)
