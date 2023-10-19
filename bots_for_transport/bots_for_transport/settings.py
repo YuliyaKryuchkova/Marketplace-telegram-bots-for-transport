@@ -76,7 +76,7 @@ AUTH_USER_MODEL = 'users.User'
 DATABASES = {
     'default': {
         'ENGINE': env('DB_ENGINE',),
-        'NAME': env('DB_NAME',),
+        'NAME': env('DB_NAME'),
         'USER': env('POSTGRES_USER',),
         'PASSWORD': env('POSTGRES_PASSWORD',),
         'HOST': env('DB_HOST',),
