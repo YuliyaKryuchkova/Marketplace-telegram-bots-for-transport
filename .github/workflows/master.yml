@@ -96,7 +96,6 @@ jobs:
             cd infra
             sudo docker-compose -f docker-compose.production.yml pull
             sudo docker-compose -f docker-compose.production.yml down
-            sudo docker image rm yuliyakryuchkova/bots_for_transport_backend
             sudo docker-compose -f docker-compose.production.yml up -d --build
             sudo docker-compose -f docker-compose.production.yml exec -T backend python manage.py migrate
             sudo docker-compose -f docker-compose.production.yml exec -T backend python manage.py collectstatic --noinput
