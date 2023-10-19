@@ -17,11 +17,21 @@ class BotSerializer(serializers.ModelSerializer):
     is_special_offer = serializers.BooleanField(read_only=True)
     photo_examples = PhotoSerializer(many=True)
     author = serializers.StringRelatedField(read_only=True)
-    category = serializers.StringRelatedField(read_only=True)
+    categories = serializers.SerializerMethodField(
+        method_name='get_categories'
+    )
 
     class Meta:
         model = Bot
         fields = '__all__'
+
+    def get_categories(self, obj):
+        bot = obj
+        return (
+            bot.categories.values(
+                'name',
+            )
+        )
 
 
 class BotReviewRatingSerializer(serializers.ModelSerializer):
