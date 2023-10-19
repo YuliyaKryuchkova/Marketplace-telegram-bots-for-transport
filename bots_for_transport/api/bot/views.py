@@ -15,7 +15,7 @@ class BotViewSet(ModelViewSet):
     filter_backends = (filters.SearchFilter, DjangoFilterBackend, )
     search_fields = ('name', 'description')
     permission_classes = (IsAuthorOrReadOnly, )
-    filterset_fields = ('category', )
+    filterset_fields = ('categories', )
 
     def get_serializer_class(self):
         if self.action == 'retrieve':
