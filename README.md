@@ -5,9 +5,9 @@ _Маркетплейс телеграм ботов может помочь об
 предлагая ассортимент ботов для разных нужд._
 
 
-### Как запустить проект на данном этапе:
+### Как запустить проект:
 
-* Клонируйте репозиторий и перейдите
+* Форкните и клонируйте репозиторий, перейдите
   в командной строке в submodule backend:
 
 ```
@@ -18,81 +18,30 @@ https://github.com/Marketplace-telegram-bots-for-transport/bots-for-transport
 cd backend
 ```
 
-* Cоздать и активировать виртуальное окружение:
+Файл workflow уже написан. Он находится в директории backend/.github/workflows/master.yml
 
-* Если у вас Linux/macOS
+* Добавьте секреты в GitHub Actions:
 
-```
-python3 -m venv env
-```
+DOCKER_USERNAME                # имя пользователя в DockerHub
 
-```
-source env/bin/activate
-```
+DOCKER_PASSWORD                # пароль пользователя в DockerHub
 
-* Установить зависимости из файла requirements.txt:
+HOST                           # ip_address сервера
 
-```
-python3 -m pip install --upgrade pip
-```
+USER                           # имя пользователя
 
-* Установить зависимости из файла requirements.txt:
+SSH_PASSWORD                   # пароль
 
-```
-pip install -r requirements.txt
-```
+* Коммитим и пушим изменения на GitHub.
 
-* Выполнить миграции:
+` git add .`
 
-```
-python3 manage.py migrate
-```
+` git commit -m 'твой коммит'`
 
-* Запустить локально сервер:
-
-```
-python3 manage.py runserver
-```
-
-* Cоздать и активировать виртуальное окружение:
-
-* Если у вас windows
-
-```
-python -m venv env
-```
-
-```
-source env/scripts/activate
-```
-
-* Установить зависимости из файла requirements.txt:
-
-```
-python -m pip install --upgrade pip
-```
-
-* Установить зависимости из файла requirements.txt:
-
-```
-pip install -r requirements.txt
-```
-
-* Выполнить миграции:
-
-```
-python manage.py migrate
-```
-
-* Запустить локально сервер:
-
-```
-python manage.py runserver
-```
+` git push`
 
 * Создайте папку .env,
-перенесите в нее список для восстановления пароля
-(указав свои данные) из файла .env.example 
+перенесите в нее список (указав свои данные) из файла .env.example 
 
 
 ##### Возможные запросы API:
@@ -115,10 +64,12 @@ python manage.py runserver
 
 * Александр Морозов - backend разработчик
 
+* Владислав Бунин - backend разработчик
+
 * Екатерина Тарасенко - backend разработчик
 
 * Павел Сарыгин - backend разработчик
 
-* Байбанов Эльдар - backend разработчик
+* Эльдар Байбанов  - backend разработчик
 
-* Крючкова Юлия - backend разработчик, тимлид
+* Юлия Крючкова  - backend разработчик, тимлид
