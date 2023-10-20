@@ -9,6 +9,9 @@ from .serializers import BotReviewRatingSerializer, BotSerializer
 
 
 class BotViewSet(ModelViewSet):
+    """Вьюсет для бота.
+    С возможностью пагинации, поиска по имени
+    и описанию, фильтрации по категориям"""
     queryset = Bot.objects.all()
     serializer_class = BotSerializer
     pagination_class = LimitPageNumberPagination
