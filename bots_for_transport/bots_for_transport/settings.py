@@ -16,6 +16,7 @@ ALLOWED_HOSTS = ['ALLOWED_HOSTS', '*']
 
 CORS_ORIGIN_ALLOW_ALL = True
 
+
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -147,6 +148,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 #  подключаем движок filebased.EmailBackend
 # EMAIL_BACKEND = env("EMAIL_BACKEND")
 # # указываем директорию, в которую будут складываться файлы писем
+
 # EMAIL_FILE_PATH = os.path.join(BASE_DIR, 'sent_emails')
 #
 # EMAIL_HOST = env("EMAIL_HOST")

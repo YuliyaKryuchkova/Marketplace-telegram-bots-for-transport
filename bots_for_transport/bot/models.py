@@ -8,6 +8,7 @@ User = get_user_model()
 
 
 class Bot(models.Model):
+    """Модель бота."""
     name = models.CharField(
         'Название',
         max_length=100
@@ -50,6 +51,7 @@ class Bot(models.Model):
 
 
 class Photo(models.Model):
+    """Модель фотографий примеров работы бота."""
     photo_examples = models.ImageField(
         'Фото(образцы)',
         upload_to='uploads/examples/%Y/%m/%d/',
