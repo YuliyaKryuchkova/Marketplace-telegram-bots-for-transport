@@ -1,30 +1,21 @@
-version: '3.8'
+version: '3.3'
 
 services:
-
-
   db:
+    env_file: .env
     image: postgres:13.0-alpine
     restart: always
     volumes:
       - db_data:/var/lib/postgresql/data/
-    env_file:
-      - ../.env
 
   backend:
-    build: 
-      context: ..
-      dockerfile: Dockerfile
-    restart: always
+    depends_on:
+      - db
+    image: yuliyakryuchkova/bots_for_transport_backend:latest
+    env_file: .env
     volumes:
       - static_value:/app/static/
       - media_value:/app/media/
-    depends_on:
-      - db
-    env_file:
-      - ../.env
-    container_name: backend
-
 
   nginx:
     image: nginx:1.19.3
@@ -42,7 +33,3 @@ volumes:
   static_value:
   media_value:
   db_data:
-
-
-
-
