@@ -7,12 +7,14 @@ from bot.models import Bot, Photo
 
 
 class PhotoSerializer(serializers.ModelSerializer):
+    """Сериализатор примеров фото бота"""
     class Meta:
         model = Photo
         fields = ('photo_examples',)
 
 
 class BotSerializer(serializers.ModelSerializer):
+    """Сериализатор списка ботов"""
     main_photo = Base64ImageField()
     is_special_offer = serializers.BooleanField(read_only=True)
     photo_examples = PhotoSerializer(many=True)
@@ -35,6 +37,8 @@ class BotSerializer(serializers.ModelSerializer):
 
 
 class BotReviewRatingSerializer(serializers.ModelSerializer):
+    """Сериализатор для детальной информации о боте.
+    Включает расчет рейтинга бота и комментарии"""
     ratings = serializers.SerializerMethodField()
     review = ReviewsSerializer(many=True)
     photo_examples = PhotoSerializer(many=True)
@@ -43,7 +47,7 @@ class BotReviewRatingSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Bot
-        exclude = ('is_special_offer', )
+        fields = '__all__'
 
     def get_ratings(self, obj):
         return obj.ratings.aggregate(Avg('value'))
