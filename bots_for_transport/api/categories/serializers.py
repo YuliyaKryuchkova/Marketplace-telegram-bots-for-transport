@@ -11,7 +11,7 @@ class CategorySerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Category
-        fields = ('name', 'bots')
+        fields = ('name', 'bots', 'id')
 
     def get_bots(self, obj):
         category = obj
