@@ -1,4 +1,4 @@
-from django.db.models import Avg
+from django.db.models import Avg, Count
 from drf_extra_fields.fields import Base64ImageField
 from rest_framework import serializers
 
@@ -44,6 +44,7 @@ class BotReviewRatingSerializer(serializers.ModelSerializer):
     photo_examples = PhotoSerializer(many=True)
     author = serializers.StringRelatedField(read_only=True)
     category = serializers.StringRelatedField(read_only=True)
+    count_of_values = serializers.SerializerMethodField()
 
     class Meta:
         model = Bot
@@ -51,3 +52,7 @@ class BotReviewRatingSerializer(serializers.ModelSerializer):
 
     def get_ratings(self, obj):
         return obj.ratings.aggregate(Avg('value'))
+
+    def get_count_of_values(self, obj):
+        return obj.ratings.values('value').annotate(count=Count('value'))
+
