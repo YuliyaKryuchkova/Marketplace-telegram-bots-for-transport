@@ -55,4 +55,3 @@ class BotReviewRatingSerializer(serializers.ModelSerializer):
 
     def get_count_of_values(self, obj):
         return obj.ratings.values('value').annotate(count=Count('value'))
-
