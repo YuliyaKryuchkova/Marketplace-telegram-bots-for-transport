@@ -1,5 +1,1 @@
-<<<<<<< HEAD
-default.conf
-=======
-master.yml
->>>>>>> develop
+docker-compose.yml
