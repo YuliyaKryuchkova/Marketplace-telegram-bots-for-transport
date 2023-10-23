@@ -9,10 +9,10 @@ from rest_framework.views import APIView
 from favorite.models import Favorite
 from favorite.serializers import FavoriteSerializer, FavoriteListSerializer
 from api.pagination import LimitPageNumberPagination
-from .serializers import FavoriteSerializer
 
 
 class FavoriteListView(ListAPIView):
+    """Вью для получаения списка ботов в избранном"""
     serializer_class = FavoriteListSerializer
 
     def get_queryset(self):
@@ -27,6 +27,7 @@ class FavoriteRetrieveSerializer(RetrieveAPIView):
 
 
 class FavoriteView(APIView):
+    """Вью для избранного"""
 
     permission_classes = [IsAuthenticated, ]
     pagination_class = LimitPageNumberPagination

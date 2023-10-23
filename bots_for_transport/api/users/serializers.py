@@ -6,6 +6,7 @@ User = get_user_model()
 
 
 class CustomUserCreateSerializer(UserCreateSerializer):
+    """Сериализатор регистрации пользователя"""
     confirm_password = serializers.CharField(write_only=True)
 
     class Meta:
@@ -38,6 +39,7 @@ class CustomUserCreateSerializer(UserCreateSerializer):
 
 
 class CustomUserSerializer(UserSerializer):
+    """Сериализатор пользователя"""
     class Meta:
         model = User
         fields = (

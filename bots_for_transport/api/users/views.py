@@ -6,8 +6,10 @@ User = get_user_model()
 
 
 class CustomDjoserUserViewSet(UserViewSet):
+    """Кастомный вьюсет для пользователя"""
     pagination_class = None
 
 
 class CustomPasswordResetView(PasswordResetView):
+    """Кастомный вьюсет для пароля пользователя"""
     pass

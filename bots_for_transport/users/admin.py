@@ -5,6 +5,7 @@ User = get_user_model()
 
 
 class UserAdmin(admin.ModelAdmin):
+    """Модель Админа"""
     fieldsets = (
         (
             'Данные пользователя',
