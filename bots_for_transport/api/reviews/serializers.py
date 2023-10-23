@@ -8,4 +8,4 @@ class ReviewsSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Reviews
-        exclude = ('bot', )
+        exclude = ['bot', ]
