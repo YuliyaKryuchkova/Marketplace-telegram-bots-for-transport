@@ -74,18 +74,26 @@ WSGI_APPLICATION = 'bots_for_transport.wsgi.application'
 
 AUTH_USER_MODEL = 'users.User'
 
-DATABASES = {
-    'default': {
-        'ENGINE': env('DB_ENGINE',),
-        'NAME': env('POSTGRES_DB',),
-        'USER': env('POSTGRES_USER',),
-        'PASSWORD': env('POSTGRES_PASSWORD',),
-        'HOST': env('DB_HOST',),
-        'PORT': env('DB_PORT', 5432)
-        # 'ENGINE': 'django.db.backends.sqlite3',
-        # 'NAME': BASE_DIR / 'db.sqlite3',
+DEVELOPMENT = env('DEVELOPMENT', default=False) == 'True'
+
+if DEVELOPMENT:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        }
     }
-}
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': env('DB_ENGINE'),
+            'NAME': env('POSTGRES_DB'),
+            'USER': env('POSTGRES_USER'),
+            'PASSWORD': env('POSTGRES_PASSWORD'),
+            'HOST': env('DB_HOST'),
+            'PORT': env('DB_PORT')
+        }
+    }
 
 AUTH_PASSWORD_VALIDATORS = [
     {
