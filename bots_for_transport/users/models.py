@@ -28,6 +28,10 @@ class User(models.Model):
         verbose_name='Повторите пароль',
         max_length=128
     )
+    image = models.ImageField(
+        upload_to='profile_image',
+        blank=True
+    )
 
     class Meta:
         verbose_name = 'Пользователь'
