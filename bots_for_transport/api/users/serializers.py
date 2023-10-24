@@ -16,7 +16,8 @@ class CustomUserCreateSerializer(UserCreateSerializer):
             'email',
             'username',
             'password',
-            'confirm_password'
+            'confirm_password',
+            'image'
         )
 
     def validate(self, data):
@@ -28,7 +29,8 @@ class CustomUserCreateSerializer(UserCreateSerializer):
         user = User.objects.create_user(
             username=validated_data['username'],
             password=validated_data['password'],
-            email=validated_data['email']
+            email=validated_data['email'],
+            image=validated_data['image'],
         )
         return user
 
@@ -48,4 +50,5 @@ class CustomUserSerializer(UserSerializer):
             'username',
             'first_name',
             'last_name',
+            'image',
         )
