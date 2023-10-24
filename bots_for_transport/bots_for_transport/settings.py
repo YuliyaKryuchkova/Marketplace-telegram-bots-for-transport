@@ -76,14 +76,14 @@ AUTH_USER_MODEL = 'users.User'
 
 DATABASES = {
     'default': {
-        # 'ENGINE': env('DB_ENGINE',),
-        # 'NAME': env('POSTGRES_DB',),
-        # 'USER': env('POSTGRES_USER',),
-        # 'PASSWORD': env('POSTGRES_PASSWORD',),
-        # 'HOST': env('DB_HOST',),
-        # 'PORT': env('DB_PORT', 5432)
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': env('DB_ENGINE',),
+        'NAME': env('POSTGRES_DB',),
+        'USER': env('POSTGRES_USER',),
+        'PASSWORD': env('POSTGRES_PASSWORD',),
+        'HOST': env('DB_HOST',),
+        'PORT': env('DB_PORT', 5432)
+        # 'ENGINE': 'django.db.backends.sqlite3',
+        # 'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
 
