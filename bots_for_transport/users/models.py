@@ -30,7 +30,8 @@ class User(AbstractUser):
     )
     image = models.ImageField(
         upload_to='profile_image',
-        blank=True
+        blank=True,
+        null=True,
     )
 
     class Meta:
