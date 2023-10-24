@@ -11,6 +11,7 @@ from api.pagination import LimitPageNumberPagination
 
 
 class FavoriteListView(ListAPIView):
+    """Вью для получаения списка ботов в избранном."""
     serializer_class = FavoriteListSerializer
 
     def get_queryset(self):
@@ -19,13 +20,14 @@ class FavoriteListView(ListAPIView):
 
 
 class FavoriteRetrieveSerializer(RetrieveAPIView):
+    """Вью для получения бота в избранном."""
     serializer_class = FavoriteSerializer
     queryset = User.objects.all()
     permission_classes = (IsAuthenticated,)
 
 
 class FavoriteView(APIView):
-
+    """Вью для избранного"""
     permission_classes = [IsAuthenticated, ]
     pagination_class = LimitPageNumberPagination
 

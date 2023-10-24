@@ -5,6 +5,7 @@ from django.db import models
 
 
 class User(AbstractUser):
+    """Модель пользователя."""
     email = models.EmailField(
         'Email',
         max_length=200,
@@ -27,6 +28,11 @@ class User(AbstractUser):
     confirm_password = models.CharField(
         verbose_name='Повторите пароль',
         max_length=128
+    )
+    image = models.ImageField(
+        upload_to='profile_image',
+        blank=True,
+        null=True,
     )
 
     class Meta:

@@ -8,7 +8,6 @@ from users.models import User
 
 class ShoppingCartSerializer(serializers.ModelSerializer):
     """Сериализатор для корзины покупок."""
-
     class Meta:
         model = Shopping_cart
         fields = ['user', 'bot']
@@ -28,6 +27,7 @@ class ShoppingCartSerializer(serializers.ModelSerializer):
 
 
 class ShoppingCartRetrieveSerializer(serializers.ModelSerializer):
+    """Сериализатор для получения информации о корзине покупок пользователя."""
     bot = serializers.SerializerMethodField()
     sum_price = serializers.SerializerMethodField()
 

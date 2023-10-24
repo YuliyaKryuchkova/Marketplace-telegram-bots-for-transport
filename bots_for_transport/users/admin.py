@@ -6,6 +6,7 @@ User = get_user_model()
 
 @admin.register(User)
 class UserAdmin(admin.ModelAdmin):
+    """Настройки для отображения модели пользователей в административной панели."""
     fieldsets = (
         (
             'Данные пользователя',
@@ -16,7 +17,9 @@ class UserAdmin(admin.ModelAdmin):
                     'first_name',
                     'last_name',
                     'email',
-                    'password')
+                    'password',
+                    'image',
+                    )
             }
         ),
         ('Права пользователя', {'fields': (
