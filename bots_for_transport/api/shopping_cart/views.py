@@ -13,12 +13,14 @@ from .serializers import ShoppingCartRetrieveSerializer, ShoppingCartSerializer
 
 
 class ShoppingCartRetrieveView(RetrieveAPIView):
+    """Вью для получения корзины покупок пользователя."""
     serializer_class = ShoppingCartRetrieveSerializer
     queryset = User.objects.all()
     permission_classes = (IsAuthenticated, IsOwner)
 
 
 class AddAndDeleteShoppingCartView(APIView):
+    """Вью для добавления и удаления товаров из корзины покупок."""
     permission_classes = [IsAuthenticated, ]
     pagination_class = LimitPageNumberPagination
 
