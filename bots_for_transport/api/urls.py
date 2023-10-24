@@ -5,6 +5,7 @@ from .bot.views import BotViewSet
 from .categories.views import CategoryViewSet
 from .favorite.views import FavoriteView, FavoriteListView
 from .rating.views import RatingViewSet
+from .reviews.views import ReviewCreateView
 from .shopping_cart.views import AddAndDeleteShoppingCartView, \
     ShoppingCartRetrieveView
 from .users.views import CustomDjoserUserViewSet, CustomPasswordResetView
@@ -56,6 +57,11 @@ urlpatterns = [
         'users/<int:pk>/shopping_cart/',
         ShoppingCartRetrieveView.as_view(),
         name='Shopping_cart'
+    ),
+    path(
+        'bots/<int:pk>/review/',
+        ReviewCreateView.as_view(),
+        name='review'
     ),
     path(
         'bots/<int:id>/favorite/',

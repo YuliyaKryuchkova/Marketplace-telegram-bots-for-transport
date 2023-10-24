@@ -8,6 +8,7 @@ User = get_user_model()
 
 
 class Bot(models.Model):
+    """Модель бота."""
     name = models.CharField(
         'Название',
         max_length=100
@@ -20,11 +21,11 @@ class Bot(models.Model):
     description = models.TextField(
         'Описание'
     )
-    category = models.ForeignKey(
+    categories = models.ManyToManyField(
         Category,
-        on_delete=models.SET_NULL,
-        verbose_name='Категория',
-        null=True,
+        through='CategoryBot',
+        related_name='bots',
+        verbose_name='Категории',
     )
     main_photo = models.ImageField(
         'Фото',
@@ -50,6 +51,7 @@ class Bot(models.Model):
 
 
 class Photo(models.Model):
+    """Модель фотографий примеров работы бота."""
     photo_examples = models.ImageField(
         'Фото(образцы)',
         upload_to='uploads/examples/%Y/%m/%d/',
@@ -68,3 +70,25 @@ class Photo(models.Model):
 
     def __str__(self):
         return f' Фото бота {self.bot}'
+
+
+class CategoryBot(models.Model):
+    """Модель категория/бот."""
+
+    category = models.ForeignKey(
+        Category,
+        on_delete=models.CASCADE,
+        verbose_name='Категория'
+    )
+    bot = models.ForeignKey(
+        Bot,
+        on_delete=models.CASCADE,
+        verbose_name='Бот'
+    )
+
+    class Meta:
+        verbose_name = 'Категории бота'
+        verbose_name_plural = 'Категории ботов'
+
+    def __str__(self):
+        return f'{self.category} {self.bot}'
