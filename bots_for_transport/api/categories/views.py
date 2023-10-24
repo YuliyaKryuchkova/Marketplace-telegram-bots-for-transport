@@ -5,5 +5,6 @@ from .serializers import CategorySerializer
 
 
 class CategoryViewSet(ReadOnlyModelViewSet):
+    """Вьюсет для категорий."""
     queryset = Category.objects.all()
     serializer_class = CategorySerializer

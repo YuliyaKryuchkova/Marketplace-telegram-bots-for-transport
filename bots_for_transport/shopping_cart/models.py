@@ -8,7 +8,7 @@ User = get_user_model()
 
 
 class Shopping_cart(models.Model):
-    """Боты в корзине покупок."""
+    """Модель корзины покупок."""
     bot = models.ForeignKey(
         Bot,
         on_delete=models.CASCADE,

@@ -2,8 +2,7 @@ from django.db import models
 
 
 class Category(models.Model):
-    """Модель категории."""
-
+    """Модель категорий."""
     name = models.CharField(
         max_length=256,
         unique=True,
