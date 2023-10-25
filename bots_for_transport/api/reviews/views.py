@@ -11,6 +11,7 @@ from reviews.models import Reviews
 class ReviewCreateView(CreateAPIView,
                        UpdateModelMixin,
                        DestroyModelMixin):
+    """Вью для создания, изменения, удаления отзывов."""
     serializer_class = ReviewsSerializer
     permission_classes = (IsAuthor, IsAuthorOrReadOnly)
 
