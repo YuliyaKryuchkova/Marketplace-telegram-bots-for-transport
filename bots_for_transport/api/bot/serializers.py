@@ -38,7 +38,7 @@ class BotSerializer(serializers.ModelSerializer):
 
 class BotReviewRatingSerializer(serializers.ModelSerializer):
     """Сериализатор для детальной информации о боте.
-    Включает расчет рейтинга бота и комментарии """
+    Включает расчет рейтинга бота и комментарии"""
     ratings = serializers.SerializerMethodField()
     review = ReviewsSerializer(many=True)
     photo_examples = PhotoSerializer(many=True)
