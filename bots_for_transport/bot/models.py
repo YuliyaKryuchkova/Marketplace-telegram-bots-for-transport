@@ -8,7 +8,7 @@ User = get_user_model()
 
 
 class Bot(models.Model):
-    """Модель бота. """
+    """Модель бота."""
     name = models.CharField(
         'Название',
         max_length=100
