@@ -1,19 +1,21 @@
-import os
 from pathlib import Path
 import os
 
 from environs import Env
 
 env = Env()
-env.read_env()  # read .env file, if it exists
+env.read_env()
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = 'django-insecure-ftwj&rd_2*a76-j+r^_3$%p456#=8^y(=fh0zmurni0jce$tl-'
 
-DEBUG = True
+DEBUG = env.bool('DEBUG', True)
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
+ALLOWED_HOSTS = ['ALLOWED_HOSTS', '*']
+
+CORS_ORIGIN_ALLOW_ALL = True
+
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -35,12 +37,14 @@ INSTALLED_APPS = [
     'categories.apps.CategoriesConfig',
     'shopping_cart.apps.Shopping_cartConfig',
     'favorite.apps.FavoriteConfig',
-    'django_extensions'
+    'django_extensions',
+    'corsheaders'
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -68,19 +72,19 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'bots_for_transport.wsgi.application'
 
+AUTH_USER_MODEL = 'users.User'
+
 DATABASES = {
     'default': {
-        'ENGINE': os.getenv('DB_ENGINE'),
-        'NAME': os.getenv('DB_NAME'),
-        'USER': os.getenv('POSTGRES_USER'),
-        'PASSWORD': os.getenv('POSTGRES_PASSWORD'),
-        'HOST': os.getenv('DB_HOST'),
-        'PORT': os.getenv('DB_PORT')
+        # 'ENGINE': env('DB_ENGINE',),
+        # 'NAME': env('POSTGRES_DB',),
+        # 'USER': env('POSTGRES_USER',),
+        # 'PASSWORD': env('POSTGRES_PASSWORD',),
+        # 'HOST': env('DB_HOST',),
+        # 'PORT': env('DB_PORT', 5432)
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
-    # 'default': {
-    #     'ENGINE': 'django.db.backends.sqlite3',
-    #     'NAME': BASE_DIR / 'db.sqlite3',
-    # }
 }
 
 AUTH_PASSWORD_VALIDATORS = [
@@ -110,24 +114,25 @@ REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.AllowAny',
     ],
-    # 'DEFAULT_AUTHENTICATION_CLASSES': [
-    #         'rest_framework.authentication.BasicAuthentication',
-    #         'rest_framework.authentication.SessionAuthentication',
-    #     ],
     'DEFAULT_AUTHENTICATION_CLASSES': [
-        'rest_framework.authentication.TokenAuthentication',
-    ],
+            'rest_framework.authentication.BasicAuthentication',
+            'rest_framework.authentication.SessionAuthentication',
+        ],
+    # 'DEFAULT_AUTHENTICATION_CLASSES': [
+    #     'rest_framework.authentication.TokenAuthentication',
+    # ],
+    # 'CORS_ORIGIN_ALLOW_ALL': True,
 }
 
 DJOSER = {
     'PERMISSIONS': {
         'user': ['djoser.permissions.CurrentUserOrAdminOrReadOnly'],
     },
-    'PASSWORD_RESET_CONFIRM_URL': '#/password/reset/confirm/{uid}/{token}',
-    'USERNAME_RESET_CONFIRM_URL': '#/username/reset/confirm/{uid}/{token}',
-    'ACTIVATION_URL': '#/activate/{uid}/{token}',
-    'SEND_ACTIVATION_EMAIL': True,
-    'LOGIN_FIELD': 'email',
+    # 'PASSWORD_RESET_CONFIRM_URL': '#/password/reset/confirm/{uid}/{token}',
+    # 'USERNAME_RESET_CONFIRM_URL': '#/username/reset/confirm/{uid}/{token}',
+    # 'ACTIVATION_URL': '#/activate/{uid}/{token}',
+    # 'SEND_ACTIVATION_EMAIL': True,
+    # 'LOGIN_FIELD': 'email',
     'SERIALIZERS': {
         'user_create': 'api.users.serializers.CustomUserCreateSerializer',
         'user': 'api.users.serializers.CustomUserSerializer',
@@ -141,21 +146,24 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # --------------------------------------------------------------
 # почта
 #  подключаем движок filebased.EmailBackend
-EMAIL_BACKEND = env("EMAIL_BACKEND")
-# указываем директорию, в которую будут складываться файлы писем
-EMAIL_FILE_PATH = os.path.join(BASE_DIR, 'sent_emails')
+# EMAIL_BACKEND = env("EMAIL_BACKEND")
+# # указываем директорию, в которую будут складываться файлы писем
 
-EMAIL_HOST = env("EMAIL_HOST")
-EMAIL_PORT = env.int("EMAIL_PORT")
-EMAIL_HOST_USER = env("EMAIL_HOST_USER")
-EMAIL_HOST_PASSWORD = env("EMAIL_HOST_PASSWORD")
-EMAIL_USE_SSL = env.bool("EMAIL_USE_SSL")
-EMAIL_DOMAIN = env("EMAIL_DOMAIN")
-SERVER_EMAIL = f"{EMAIL_HOST_USER}@{EMAIL_DOMAIN}"
-DEFAULT_FROM_EMAIL = f"{EMAIL_HOST_USER}@{EMAIL_DOMAIN}"
+# EMAIL_FILE_PATH = os.path.join(BASE_DIR, 'sent_emails')
+#
+# EMAIL_HOST = env("EMAIL_HOST")
+# EMAIL_PORT = env.int("EMAIL_PORT")
+# EMAIL_HOST_USER = env("EMAIL_HOST_USER")
+# EMAIL_HOST_PASSWORD = env("EMAIL_HOST_PASSWORD")
+# EMAIL_USE_SSL = env.bool("EMAIL_USE_SSL")
+# EMAIL_DOMAIN = env("EMAIL_DOMAIN")
+# SERVER_EMAIL = f"{EMAIL_HOST_USER}@{EMAIL_DOMAIN}"
+# DEFAULT_FROM_EMAIL = f"{EMAIL_HOST_USER}@{EMAIL_DOMAIN}"
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, "static")
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+PAGINATION_PAGE_SIZE = 12

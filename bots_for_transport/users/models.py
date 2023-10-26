@@ -1,3 +1,4 @@
+from django.contrib.auth.models import AbstractUser
 from django.contrib.auth.validators import UnicodeUsernameValidator
 from django.core.exceptions import ValidationError
 from django.db import models
@@ -6,8 +7,7 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
 
-class User(models.Model):
-    """Модель пользователя"""
+class User(AbstractUser):
     email = models.EmailField(
         'Email',
         max_length=200,

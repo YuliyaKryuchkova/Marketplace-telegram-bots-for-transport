@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Bot, Photo
+from .models import Bot, CategoryBot, Photo
 
 
 class PhotoAdmin(admin.TabularInline):
@@ -14,4 +14,9 @@ class BotAdmin(admin.ModelAdmin):
     ]
 
 
+class CategoryBotAdmin(admin.ModelAdmin):
+    model = CategoryBot
+
+
 admin.site.register(Bot, BotAdmin)
+admin.site.register(CategoryBot)
