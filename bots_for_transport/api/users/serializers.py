@@ -30,7 +30,7 @@ class CustomUserCreateSerializer(UserCreateSerializer):
             username=validated_data['username'],
             password=validated_data['password'],
             email=validated_data['email'],
-            image=validated_data['image'],
+            image=validated_data.get('image', None),
         )
         return user
 
