@@ -6,7 +6,8 @@ from users.models import User
 
 
 class FavoriteSerializer(serializers.ModelSerializer):
-
+    """Сериализатор для модели Favorite.
+    Проверка дублей и определение полей для чтения и записи."""
     class Meta:
         model = Favorite
         fields = ['user', 'bot']
@@ -26,6 +27,7 @@ class FavoriteSerializer(serializers.ModelSerializer):
 
 
 class FavoriteRetrieveSerializer(serializers.ModelSerializer):
+    """Сериализатор для ботов в избранном"""
     bot = serializers.SerializerMethodField()
 
     class Meta:
@@ -37,6 +39,7 @@ class FavoriteRetrieveSerializer(serializers.ModelSerializer):
 
 
 class FavoriteListSerializer(serializers.ModelSerializer):
+    """Сериализатор для списка избранного"""
     bot = BotSerializer()
 
     class Meta:

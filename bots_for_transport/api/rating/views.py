@@ -5,6 +5,7 @@ from .serializers import RatingSerializer
 
 
 class RatingViewSet(viewsets.ModelViewSet):
+    """Вьюсет рейтинга."""
     queryset = Rating.objects.all()
     serializer_class = RatingSerializer
 

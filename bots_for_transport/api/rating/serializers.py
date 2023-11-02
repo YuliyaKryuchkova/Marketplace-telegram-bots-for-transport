@@ -4,6 +4,7 @@ from rating.models import Rating
 
 
 class RatingSerializer(serializers.ModelSerializer):
+    """Сериализатор для модели Rating."""
     class Meta:
         model = Rating
         fields = '__all__'

@@ -73,7 +73,6 @@ class Photo(models.Model):
 
 class CategoryBot(models.Model):
     """Модель категория/бот."""
-
     category = models.ForeignKey(
         Category,
         on_delete=models.CASCADE,

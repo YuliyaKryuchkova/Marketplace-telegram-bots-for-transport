@@ -8,6 +8,7 @@ User = get_user_model()
 
 
 class Favorite(models.Model):
+    """Модель избранного"""
     user = models.ForeignKey(
         User,
         on_delete=models.CASCADE,
