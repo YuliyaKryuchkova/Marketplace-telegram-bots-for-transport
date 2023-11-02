@@ -2,10 +2,10 @@ from django.contrib.auth.models import AbstractUser
 from django.contrib.auth.validators import UnicodeUsernameValidator
 from django.core.exceptions import ValidationError
 from django.db import models
-from django.contrib.auth import authenticate, login
-from django.contrib.auth.forms import AuthenticationForm
+# from django.contrib.auth import authenticate, login
+# from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.models import User
-from django.shortcuts import render, redirect
+# from django.shortcuts import render, redirect
 
 class User(AbstractUser):
     """Модель пользователя."""
@@ -39,21 +39,21 @@ class User(AbstractUser):
     )
 
 
-    def login(request):
-        if request.method == 'POST':
-            form = AuthenticationForm(request.POST)
-            if form.is_valid():
-                email = form.cleaned_data['email']
-                password = form.cleaned_data['password']
-                user = authenticate(request, email=email, password=password)
-                if user is not None:
-                    login(request, user)
-                    return redirect('posts:index')
-                else:
-                    form.add_error(None, 'Неправильные почта или пароль')
-        else:
-            form = AuthenticationForm()
-        return render(request, 'users/login.html', {'form': form})
+    # def login(request):
+    #     if request.method == 'POST':
+    #         form = AuthenticationForm(request.POST)
+    #         if form.is_valid():
+    #             email = form.cleaned_data['email']
+    #             password = form.cleaned_data['password']
+    #             user = authenticate(request, email=email, password=password)
+    #             if user is not None:
+    #                 login(request, user)
+    #                 return redirect('posts:index')
+    #             else:
+    #                 form.add_error(None, 'Неправильные почта или пароль')
+    #     else:
+    #         form = AuthenticationForm()
+    #     return render(request, 'users/login.html', {'form': form})
     
 
     class Meta:
