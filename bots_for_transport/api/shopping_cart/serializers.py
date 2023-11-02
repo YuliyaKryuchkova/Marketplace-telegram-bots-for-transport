@@ -1,9 +1,8 @@
-from django.db.models import Sum
-from rest_framework import serializers
-
 from api.bot.serializers import BotSerializer
-from shopping_cart.models import Shopping_cart
+from rest_framework import serializers
 from users.models import User
+
+from shopping_cart.models import Shopping_cart
 
 
 class ShoppingCartSerializer(serializers.ModelSerializer):
@@ -35,8 +34,26 @@ class ShoppingCartRetrieveSerializer(serializers.ModelSerializer):
         model = User
         exclude = ('confirm_password', 'email', 'password')
 
+    # def get_sum_price(self, obj):
+    #     return obj.in_shopping_cart.all().aggregate(Sum('bot__price'))
+
     def get_sum_price(self, obj):
-        return obj.in_shopping_cart.all().aggregate(Sum('bot__price'))
+        total_price = 0
+        for item in obj.in_shopping_cart.all():
+            bot_serializer = BotSerializer(item.bot)
+            final_price = bot_serializer.data['final_price']
+            total_price += final_price
+        return total_price
+
+    # def get_bot(self, obj):
+    #     return obj.in_shopping_cart.all().values('bot__name', 'bot__price')
 
     def get_bot(self, obj):
-        return obj.in_shopping_cart.all().values('bot__name', 'bot__price')
+        bot_data = []
+        for item in obj.in_shopping_cart.all():
+            bot_serializer = BotSerializer(item.bot)
+            bot_data.append({
+                'name': bot_serializer.data['name'],
+                'price': bot_serializer.data['final_price'],
+            })
+        return bot_data

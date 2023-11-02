@@ -1,8 +1,7 @@
-from django.contrib.auth import get_user_model
-from django.db import models
-
 from categories.models import Category
-
+from django.contrib.auth import get_user_model
+from django.core.validators import MaxValueValidator, MinValueValidator
+from django.db import models
 
 User = get_user_model()
 
@@ -34,7 +33,7 @@ class Bot(models.Model):
     price = models.DecimalField(
         'Цена',
         max_digits=8,
-        decimal_places=2
+        decimal_places=0
     )
     is_special_offer = models.BooleanField(
         'Спецпредложение',
@@ -92,3 +91,27 @@ class CategoryBot(models.Model):
 
     def __str__(self):
         return f'{self.category} {self.bot}'
+
+
+class BotDiscount(models.Model):
+    bot = models.OneToOneField(
+        Bot,
+        on_delete=models.CASCADE,
+        related_name='discounts',
+        verbose_name='Бот',
+    )
+    discount = models.DecimalField(
+        'Скидка',
+        max_digits=3,
+        decimal_places=0,
+        default=0,
+        validators=[MinValueValidator(0), MaxValueValidator(100)],
+        help_text='Введите скидку от автора в процентах (от 0 до 100).'
+    )
+
+    class Meta:
+        verbose_name = 'Скидка на бота'
+        verbose_name_plural = 'Скидки на ботов'
+
+    def __str__(self):
+        return f'{self.bot.name}'
