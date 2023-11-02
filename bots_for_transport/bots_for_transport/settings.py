@@ -16,6 +16,8 @@ ALLOWED_HOSTS = ['ALLOWED_HOSTS', '*']
 
 CORS_ORIGIN_ALLOW_ALL = True
 
+CSRF_TRUSTED_ORIGINS=['https://http://80.87.96.7/']
+
 
 INSTALLED_APPS = [
     'django.contrib.admin',
