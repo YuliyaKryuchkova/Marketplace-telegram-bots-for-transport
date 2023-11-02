@@ -8,6 +8,7 @@ User = get_user_model()
 
 
 class Reviews(models.Model):
+    """Модель отзывов."""
     bot = models.ForeignKey(
         Bot,
         on_delete=models.CASCADE,

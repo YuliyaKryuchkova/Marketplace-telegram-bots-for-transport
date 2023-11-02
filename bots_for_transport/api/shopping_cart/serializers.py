@@ -1,4 +1,5 @@
 from api.bot.serializers import BotSerializer
+from django.db.models import Count, Sum
 from rest_framework import serializers
 from users.models import User
 
@@ -7,7 +8,6 @@ from shopping_cart.models import Shopping_cart
 
 class ShoppingCartSerializer(serializers.ModelSerializer):
     """Сериализатор для корзины покупок."""
-
     class Meta:
         model = Shopping_cart
         fields = ['user', 'bot']
@@ -27,8 +27,10 @@ class ShoppingCartSerializer(serializers.ModelSerializer):
 
 
 class ShoppingCartRetrieveSerializer(serializers.ModelSerializer):
+    """Сериализатор для получения информации о корзине покупок пользователя."""
     bot = serializers.SerializerMethodField()
     sum_price = serializers.SerializerMethodField()
+    bot_count = serializers.SerializerMethodField()
 
     class Meta:
         model = User
@@ -57,3 +59,7 @@ class ShoppingCartRetrieveSerializer(serializers.ModelSerializer):
                 'price': bot_serializer.data['final_price'],
             })
         return bot_data
+        return obj.in_shopping_cart.all().values('bot__name', 'bot__price')
+
+    def get_bot_count(self, obj):
+        return obj.in_shopping_cart.all().count()

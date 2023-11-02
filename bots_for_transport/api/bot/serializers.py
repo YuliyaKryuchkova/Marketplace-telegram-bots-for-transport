@@ -9,7 +9,7 @@ from bot.models import Bot, BotDiscount, Photo
 
 
 class PhotoSerializer(serializers.ModelSerializer):
-    """Сериализатор примеров фото бота"""
+    """Сериализатор примеров фото бота """
     class Meta:
         model = Photo
         fields = ('photo_examples',)

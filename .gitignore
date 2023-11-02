@@ -162,3 +162,5 @@ cython_debug/
 uploads/
 
 sent_emails/
+
+media/
