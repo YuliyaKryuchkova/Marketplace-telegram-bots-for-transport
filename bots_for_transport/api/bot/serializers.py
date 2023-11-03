@@ -77,8 +77,15 @@ class BotReviewRatingSerializer(serializers.ModelSerializer):
         return obj.ratings.values('value').annotate(count=Count('value'))
 
     def get_discount(self, obj):
-        return math.ceil(obj.discounts.discount)
+        try:
+            discount = obj.discounts.discount
+        except BotDiscount.DoesNotExist:
+            discount = 0
+        return math.ceil(discount)
 
     def get_final_price(self, obj):
-        return math.ceil(
-            obj.price - (obj.price * obj.discounts.discount / 100))
+        try:
+            discount = obj.discounts.discount
+        except BotDiscount.DoesNotExist:
+            discount = 0
+        return math.ceil(obj.price - (obj.price * discount / 100))
