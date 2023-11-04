@@ -76,7 +76,7 @@ WSGI_APPLICATION = 'bots_for_transport.wsgi.application'
 
 AUTH_USER_MODEL = 'users.User'
 
-DEVELOPMENT = env('DEVELOPMENT', default=False) == 'True'
+DEVELOPMENT = True
 
 if DEVELOPMENT:
     DATABASES = {
@@ -124,13 +124,13 @@ REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.AllowAny',
     ],
-    # 'DEFAULT_AUTHENTICATION_CLASSES': [
-    #         'rest_framework.authentication.BasicAuthentication',
-    #         'rest_framework.authentication.SessionAuthentication',
-    #     ],
     'DEFAULT_AUTHENTICATION_CLASSES': [
-        'rest_framework.authentication.TokenAuthentication',
-    ],
+            'rest_framework.authentication.BasicAuthentication',
+            'rest_framework.authentication.SessionAuthentication',
+        ],
+    # 'DEFAULT_AUTHENTICATION_CLASSES': [
+    #     'rest_framework.authentication.TokenAuthentication',
+    # ],
     'CORS_ORIGIN_ALLOW_ALL': True,
 }
 

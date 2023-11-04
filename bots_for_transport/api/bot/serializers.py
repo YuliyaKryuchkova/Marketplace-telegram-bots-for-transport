@@ -10,6 +10,8 @@ from bot.models import Bot, BotDiscount, Photo
 
 class PhotoSerializer(serializers.ModelSerializer):
     """Сериализатор примеров фото бота """
+    photo_examples = Base64ImageField()
+
     class Meta:
         model = Photo
         fields = ('photo_examples',)
