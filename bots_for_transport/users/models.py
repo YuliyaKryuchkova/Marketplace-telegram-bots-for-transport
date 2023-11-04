@@ -1,10 +1,10 @@
-from django.contrib.auth.models import AbstractUser
+# from django.contrib.auth import authenticate, login
+# from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.models import AbstractUser, User
 from django.contrib.auth.validators import UnicodeUsernameValidator
 from django.core.exceptions import ValidationError
 from django.db import models
-# from django.contrib.auth import authenticate, login
-# from django.contrib.auth.forms import AuthenticationForm
-from django.contrib.auth.models import User
+
 # from django.shortcuts import render, redirect
 
 class User(AbstractUser):

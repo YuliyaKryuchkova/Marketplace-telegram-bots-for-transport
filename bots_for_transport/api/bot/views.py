@@ -1,10 +1,11 @@
+from api.pagination import LimitPageNumberPagination
+from api.permissions import IsAuthor, IsAuthorOrReadOnly
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import filters
 from rest_framework.viewsets import ModelViewSet
 
-from api.pagination import LimitPageNumberPagination
 from bot.models import Bot
-from api.permissions import IsAuthor, IsAuthorOrReadOnly
+
 from .serializers import BotReviewRatingSerializer, BotSerializer
 
 

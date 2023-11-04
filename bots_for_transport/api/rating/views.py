@@ -1,6 +1,7 @@
 from rest_framework import viewsets
 
 from rating.models import Bot, Rating
+
 from .serializers import RatingSerializer
 
 
