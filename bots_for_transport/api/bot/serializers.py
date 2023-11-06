@@ -1,6 +1,7 @@
 import math
 
 from api.reviews.serializers import ReviewsSerializer
+from categories.models import Category
 from django.db.models import Avg, Count, Max
 from drf_extra_fields.fields import Base64ImageField
 from rest_framework import serializers
@@ -10,9 +11,20 @@ from bot.models import BannerCategory, Bot, BotDiscount, Photo
 
 class PhotoSerializer(serializers.ModelSerializer):
     """Сериализатор примеров фото бота"""
+    photo_examples = Base64ImageField()
+
     class Meta:
         model = Photo
         fields = ('photo_examples',)
+
+
+class CategoryNameSerializer(serializers.PrimaryKeyRelatedField):
+    """
+    Класс сериализатора (переопределённый), представляющий имя категории
+    для данного значения первичного ключа.
+    """
+    def to_representation(self, value):
+        return value.name
 
 
 class AbstractBotSerializer(serializers.ModelSerializer):
@@ -20,26 +32,25 @@ class AbstractBotSerializer(serializers.ModelSerializer):
     Абстрактный класс, который определяет поведение сериализации и
     десериализации для данных, связанных с ботами.
     """
-    photo_examples = PhotoSerializer(many=True)
     author = serializers.StringRelatedField(read_only=True)
+    photo_examples = PhotoSerializer(many=True, read_only=True)
     discount_author = serializers.SerializerMethodField()
     discount_category = serializers.SerializerMethodField()
     amount_discounts_sum = serializers.SerializerMethodField()
     final_price = serializers.SerializerMethodField()
+    categories = CategoryNameSerializer(
+        required=False,
+        queryset=Category.objects.all(),
+        many=True,
+    )
 
     class Meta:
         abstract = True
         fields = '__all__'
 
     def get_discount_author(self, obj):
-        """
-        Расчёт скидки от автора бота (округление значения в большую сторону)
-        """
-        try:
-            discount = obj.discounts_author.discount
-        except BotDiscount.DoesNotExist:
-            discount = 0
-        return math.ceil(discount)
+        return math.ceil(obj.discounts_author.discount) if hasattr(
+            obj, 'discounts_author') else 0
 
     def get_discount_category(self, obj):
         """Расчёт скидки по категории бота"""
@@ -59,9 +70,12 @@ class AbstractBotSerializer(serializers.ModelSerializer):
 
     def get_amount_discounts_sum(self, obj):
         """Суммирование скидки от автора и по категории."""
-        discount_author = self.get_discount_author(obj)
+        try:
+            discount_author = obj.discounts_author.discount
+        except BotDiscount.DoesNotExist:
+            discount_author = 0
         discount_category = self.get_discount_category(obj)
-        return discount_author + discount_category
+        return math.ceil(discount_author + discount_category)
 
     def get_final_price(self, obj):
         """Вычисление итоговой цены бота с учётом всех скидок."""
@@ -81,21 +95,10 @@ class BotSerializer(AbstractBotSerializer):
     """Сериализатор списка ботов"""
     main_photo = Base64ImageField()
     is_special_offer = serializers.BooleanField(read_only=True)
-    categories = serializers.SerializerMethodField(
-        method_name='get_categories'
-    )
 
     class Meta(AbstractBotSerializer.Meta):
         model = Bot
         fields = '__all__'
-
-    def get_categories(self, obj):
-        bot = obj
-        return (
-            bot.categories.values(
-                'name',
-            )
-        )
 
 
 class BotReviewRatingSerializer(AbstractBotSerializer):
@@ -103,7 +106,6 @@ class BotReviewRatingSerializer(AbstractBotSerializer):
     Включает расчет рейтинга бота и комментарии"""
     ratings = serializers.SerializerMethodField()
     review = ReviewsSerializer(many=True)
-    category = serializers.StringRelatedField(read_only=True)
     count_of_values = serializers.SerializerMethodField()
 
     class Meta(AbstractBotSerializer.Meta):
