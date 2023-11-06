@@ -7,6 +7,7 @@ from django.db import models
 
 # from django.shortcuts import render, redirect
 
+
 class User(AbstractUser):
     """Модель пользователя."""
     email = models.EmailField(
@@ -37,7 +38,10 @@ class User(AbstractUser):
         blank=True,
         null=True,
     )
-
+    is_author = models.BooleanField(
+        verbose_name='Author',
+        default=False,
+    )
 
     # def login(request):
     #     if request.method == 'POST':
@@ -54,7 +58,6 @@ class User(AbstractUser):
     #     else:
     #         form = AuthenticationForm()
     #     return render(request, 'users/login.html', {'form': form})
-    
 
     class Meta:
         verbose_name = 'Пользователь'
@@ -67,5 +70,6 @@ class User(AbstractUser):
         super().clean()
         if self.username == 'me':
             raise ValidationError('Имя пользователя не может быть "me"')
-        if User.objects.filter(email=self.email).exists():
+        if self.pk is not None and User.objects.filter(
+                email=self.email).exclude(pk=self.pk).exists():
             raise ValidationError('Пользователь с такой почтой уже существует')

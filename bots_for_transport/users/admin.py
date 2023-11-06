@@ -6,7 +6,8 @@ User = get_user_model()
 
 @admin.register(User)
 class UserAdmin(admin.ModelAdmin):
-    """Настройки для отображения модели пользователей в административной панели."""
+    """Настройки для отображения модели пользователей в административной
+    панели."""
     fieldsets = (
         (
             'Данные пользователя',
@@ -19,7 +20,8 @@ class UserAdmin(admin.ModelAdmin):
                     'email',
                     'password',
                     'image',
-                    )
+                    'is_author',
+                )
             }
         ),
         ('Права пользователя', {'fields': (
@@ -38,6 +40,7 @@ class UserAdmin(admin.ModelAdmin):
         'email',
         'first_name',
         'last_name',
+        'is_author',
     )
     search_fields = (
         'email',
@@ -48,6 +51,7 @@ class UserAdmin(admin.ModelAdmin):
     list_filter = (
         'email',
         'first_name',
+        'is_author',
     )
     empty_value_display = '-пусто-'
 
