@@ -1,8 +1,7 @@
+from categories.models import Category
 from django.contrib.auth import get_user_model
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
-
-from categories.models import Category
 
 User = get_user_model()
 
@@ -16,7 +15,7 @@ class Bot(models.Model):
     author = models.ForeignKey(
         User,
         on_delete=models.CASCADE,
-        verbose_name='Автор'
+        verbose_name='Автор',
     )
     description = models.TextField(
         'Описание'
