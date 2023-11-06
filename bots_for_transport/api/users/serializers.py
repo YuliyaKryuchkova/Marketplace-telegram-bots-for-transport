@@ -51,4 +51,5 @@ class CustomUserSerializer(UserSerializer):
             'first_name',
             'last_name',
             'image',
+            'is_author',
         )
