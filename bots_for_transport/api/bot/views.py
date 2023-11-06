@@ -48,7 +48,7 @@ class BotViewSet(ModelViewSet):
                     # создает новый экземпляр фотографии с помощью экземпляра
                     # бота
                     photo = Photo.objects.create(bot=bot_instance)
-                    #  сохраняет данные photo_examples в экземпляре Photo..
+                    #  сохраняет данные photo_examples в экземпляре Photo
                     photo.photo_examples.save(
                         f"{photo.pk}.jpg",
                         ContentFile(base64.b64decode(
