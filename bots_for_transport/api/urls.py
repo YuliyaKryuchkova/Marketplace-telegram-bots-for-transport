@@ -4,7 +4,7 @@ from rest_framework.routers import DefaultRouter
 from .bot.views import BotViewSet
 from .categories.views import CategoryViewSet
 from .favorite.views import FavoriteView, FavoriteListView
-from .rating.views import RatingViewSet
+from .rating.views import RatingCreateView
 from .reviews.views import ReviewCreateView
 from .shopping_cart.views import AddAndDeleteShoppingCartView, \
     ShoppingCartRetrieveView
@@ -23,11 +23,6 @@ router_v1.register(
     'categories',
     CategoryViewSet,
     basename='categories'
-)
-router_v1.register(
-    r'bots/(?P<bot_id>[^/.]+)/ratings',
-    RatingViewSet,
-    basename='ratings'
 )
 router_v1.register(
     'users',
@@ -73,7 +68,14 @@ urlpatterns = [
         FavoriteListView.as_view(),
         name='Favorite'
     ),
-    path('users/reset-password/',
+    path(
+        'users/reset-password/',
          CustomPasswordResetView.as_view(),
-         name='password_reset'),
+         name='password_reset'
+    ),
+    path(
+        'bots/<int:pk>/rating/',
+        RatingCreateView.as_view(),
+        name='rating'
+    ),
 ]
