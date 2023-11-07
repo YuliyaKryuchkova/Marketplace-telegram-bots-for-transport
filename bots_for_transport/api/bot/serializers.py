@@ -35,7 +35,7 @@ class AbstractBotSerializer(serializers.ModelSerializer):
     author = serializers.StringRelatedField(read_only=True)
     photo_examples = PhotoSerializer(many=True, read_only=True)
     discount_author = serializers.SerializerMethodField()
-    discount_category = serializers.SerializerMethodField()
+    discount_category = serializers.SerializerMethodField(required=False)
     amount_discounts_sum = serializers.SerializerMethodField()
     final_price = serializers.SerializerMethodField()
     categories = CategoryNameSerializer(
@@ -64,6 +64,8 @@ class AbstractBotSerializer(serializers.ModelSerializer):
             else:
                 discount = BannerCategory.objects.aggregate(Max('discount'))[
                     'discount__max']
+            if discount is None:
+                discount = 0
         except BannerCategory.DoesNotExist:
             discount = 0
         return math.ceil(discount)
