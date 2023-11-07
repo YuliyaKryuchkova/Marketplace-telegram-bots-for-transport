@@ -1,7 +1,8 @@
-from django.contrib.auth.models import AbstractUser
+from django.contrib.auth.models import AbstractUser, User
 from django.contrib.auth.validators import UnicodeUsernameValidator
 from django.core.exceptions import ValidationError
 from django.db import models
+
 from django.contrib.auth.models import User
 from phonenumber_field.modelfields import PhoneNumberField
 
@@ -39,6 +40,10 @@ class User(AbstractUser):
         upload_to='profile_image',
         blank=True,
         null=True,
+    )
+    is_author = models.BooleanField(
+        verbose_name='Author',
+        default=False,
     )
     sex = models.CharField(
         'Пол',
@@ -79,5 +84,6 @@ class User(AbstractUser):
         super().clean()
         if self.username == 'me':
             raise ValidationError('Имя пользователя не может быть "me"')
-        if User.objects.filter(email=self.email).exists():
+        if self.pk is not None and User.objects.filter(
+                email=self.email).exclude(pk=self.pk).exists():
             raise ValidationError('Пользователь с такой почтой уже существует')

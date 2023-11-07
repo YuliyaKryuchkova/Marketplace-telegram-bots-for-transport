@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Bot, BotDiscount, CategoryBot, Photo
+from .models import BannerCategory, Bot, BotDiscount, CategoryBot, Photo
 
 
 class PhotoAdmin(admin.TabularInline):
@@ -9,7 +9,8 @@ class PhotoAdmin(admin.TabularInline):
 
 
 class BotAdmin(admin.ModelAdmin):
-    """Настройки для отображения ботов в административной панели, включая отображение фотографий ботов."""
+    """Настройки для отображения ботов в административной панели, включая
+    отображение фотографий ботов."""
     model = Bot
     inlines = [
         PhotoAdmin,
@@ -26,6 +27,12 @@ class BotDiscountAdmin(admin.ModelAdmin):
     list_display = ('bot', 'discount')
 
 
+class BannerCategoryAdmin(admin.ModelAdmin):
+    model = BannerCategory
+    list_display = ('category', 'discount')
+
+
 admin.site.register(Bot, BotAdmin)
 admin.site.register(CategoryBot)
 admin.site.register(BotDiscount, BotDiscountAdmin)
+admin.site.register(BannerCategory, BannerCategoryAdmin)

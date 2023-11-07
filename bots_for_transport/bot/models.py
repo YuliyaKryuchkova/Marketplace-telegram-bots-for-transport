@@ -15,7 +15,7 @@ class Bot(models.Model):
     author = models.ForeignKey(
         User,
         on_delete=models.CASCADE,
-        verbose_name='Автор'
+        verbose_name='Автор',
     )
     description = models.TextField(
         'Описание'
@@ -93,10 +93,11 @@ class CategoryBot(models.Model):
 
 
 class BotDiscount(models.Model):
+    """Модель скидок от автора."""
     bot = models.OneToOneField(
         Bot,
         on_delete=models.CASCADE,
-        related_name='discounts',
+        related_name='discounts_author',
         verbose_name='Бот',
     )
     discount = models.DecimalField(
@@ -109,8 +110,33 @@ class BotDiscount(models.Model):
     )
 
     class Meta:
-        verbose_name = 'Скидка на бота'
-        verbose_name_plural = 'Скидки на ботов'
+        verbose_name = 'Скидка на бота от автора'
+        verbose_name_plural = 'Скидки на ботов от авторов'
 
     def __str__(self):
         return f'{self.bot.name}'
+
+
+class BannerCategory(models.Model):
+    """Модель скидок по категориям."""
+    category = models.OneToOneField(
+        Category,
+        on_delete=models.CASCADE,
+        verbose_name='Категория ботов',
+        related_name='discounts_category',
+    )
+    discount = models.DecimalField(
+        'Скидка',
+        max_digits=3,
+        decimal_places=0,
+        default=0,
+        validators=[MinValueValidator(0), MaxValueValidator(100)],
+        help_text='Введите скидку от автора в процентах (от 0 до 100).'
+    )
+
+    class Meta:
+        verbose_name = 'Скидку на категорию ботов'
+        verbose_name_plural = 'Скидки на категории ботов'
+
+    def __str__(self):
+        return f'{self.category.name}'

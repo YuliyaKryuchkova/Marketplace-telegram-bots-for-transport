@@ -4,7 +4,6 @@ from django.db import models
 
 from bot.models import Bot
 
-
 User = get_user_model()
 
 

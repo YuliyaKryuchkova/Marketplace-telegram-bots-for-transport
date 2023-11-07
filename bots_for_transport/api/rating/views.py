@@ -5,6 +5,7 @@ from rest_framework.decorators import action
 
 from api.permissions import IsAuthor, IsAuthorOrReadOnly
 from rating.models import Bot, Rating
+
 from .serializers import RatingSerializer
 
 

@@ -1,9 +1,9 @@
-from api.bot.serializers import BotSerializer
 from django.db.models import Count, Sum
 from rest_framework import serializers
-from users.models import User
 
+from api.bot.serializers import BotSerializer
 from shopping_cart.models import Shopping_cart
+from users.models import User
 
 
 class ShoppingCartSerializer(serializers.ModelSerializer):
