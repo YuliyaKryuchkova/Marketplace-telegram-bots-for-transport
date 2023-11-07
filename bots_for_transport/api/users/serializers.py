@@ -22,7 +22,7 @@ class CustomUserCreateSerializer(UserCreateSerializer):
 
     def validate(self, data):
         if data['password'] != data['confirm_password']:
-            raise serializers.ValidationError("Passwords do not match.")
+            raise serializers.ValidationError("Пароли не совпали")
         return data
 
     def create(self, validated_data):
@@ -52,4 +52,9 @@ class CustomUserSerializer(UserSerializer):
             'last_name',
             'image',
             'is_author',
+            'phone',
+            'birthday',
+            'notifications_favorite',
+            'notifications_discount',
+            'sex',
         )

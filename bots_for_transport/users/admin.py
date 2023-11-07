@@ -21,7 +21,12 @@ class UserAdmin(admin.ModelAdmin):
                     'password',
                     'image',
                     'is_author',
-                )
+                    'phone',
+                    'birthday',
+                    'notifications_favorite',
+                    'notifications_discount',
+                    'sex',
+                    )
             }
         ),
         ('Права пользователя', {'fields': (
@@ -54,7 +59,3 @@ class UserAdmin(admin.ModelAdmin):
         'is_author',
     )
     empty_value_display = '-пусто-'
-
-
-# admin.site.unregister(User)
-# admin.site.register(User, UserAdmin)

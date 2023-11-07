@@ -40,7 +40,8 @@ INSTALLED_APPS = [
     'shopping_cart.apps.Shopping_cartConfig',
     'favorite.apps.FavoriteConfig',
     'django_extensions',
-    'corsheaders'
+    'corsheaders',
+    'phonenumbers',
 ]
 
 MIDDLEWARE = [

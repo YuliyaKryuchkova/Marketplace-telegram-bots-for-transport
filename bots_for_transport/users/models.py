@@ -1,15 +1,18 @@
-# from django.contrib.auth import authenticate, login
-# from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.models import AbstractUser, User
 from django.contrib.auth.validators import UnicodeUsernameValidator
 from django.core.exceptions import ValidationError
 from django.db import models
 
-# from django.shortcuts import render, redirect
+from django.contrib.auth.models import User
+from phonenumber_field.modelfields import PhoneNumberField
 
 
 class User(AbstractUser):
     """Модель пользователя."""
+    SEX = (
+        ('Male', 'Мужской'),
+        ('Female', 'Женский')
+    )
     email = models.EmailField(
         'Email',
         max_length=200,
@@ -42,22 +45,33 @@ class User(AbstractUser):
         verbose_name='Author',
         default=False,
     )
+    sex = models.CharField(
+        'Пол',
+        max_length=50,
+        choices=SEX,
+        blank=True,
+        null=True
+    )
+    birthday = models.DateField(
+        'Дата Рождения',
+        blank=True,
+        null=True
+    )
+    phone = PhoneNumberField(
+        'Номер телефона',
+        unique=True,
+        blank=True,
+        null=True
+    )
+    notifications_favorite = models.BooleanField(
+        'Получать уведомления о товарах в избранном',
+        default=False
+    )
+    notifications_discount = models.BooleanField(
+        'Получать уведомления о скидках',
+        default=False
+    )
 
-    # def login(request):
-    #     if request.method == 'POST':
-    #         form = AuthenticationForm(request.POST)
-    #         if form.is_valid():
-    #             email = form.cleaned_data['email']
-    #             password = form.cleaned_data['password']
-    #             user = authenticate(request, email=email, password=password)
-    #             if user is not None:
-    #                 login(request, user)
-    #                 return redirect('posts:index')
-    #             else:
-    #                 form.add_error(None, 'Неправильные почта или пароль')
-    #     else:
-    #         form = AuthenticationForm()
-    #     return render(request, 'users/login.html', {'form': form})
 
     class Meta:
         verbose_name = 'Пользователь'
