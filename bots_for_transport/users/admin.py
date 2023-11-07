@@ -19,6 +19,11 @@ class UserAdmin(admin.ModelAdmin):
                     'email',
                     'password',
                     'image',
+                    'phone',
+                    'birthday',
+                    'notifications_favorite',
+                    'notifications_discount',
+                    'sex',
                     )
             }
         ),
@@ -50,7 +55,3 @@ class UserAdmin(admin.ModelAdmin):
         'first_name',
     )
     empty_value_display = '-пусто-'
-
-
-# admin.site.unregister(User)
-# admin.site.register(User, UserAdmin)
