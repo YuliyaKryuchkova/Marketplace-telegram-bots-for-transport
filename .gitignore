@@ -164,3 +164,5 @@ uploads/
 sent_emails/
 
 media/
+.idea
+.vscode

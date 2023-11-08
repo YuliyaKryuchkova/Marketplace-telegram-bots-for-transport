@@ -39,6 +39,9 @@ class Bot(models.Model):
         'Спецпредложение',
         default=False
     )
+    count = models.IntegerField(
+        'Количество',
+    )
 
     class Meta:
         ordering = ('name',)
