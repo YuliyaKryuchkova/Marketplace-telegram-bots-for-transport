@@ -51,6 +51,7 @@ class CustomUserSerializer(UserSerializer):
             'first_name',
             'last_name',
             'image',
+            'is_author',
             'phone',
             'birthday',
             'notifications_favorite',
