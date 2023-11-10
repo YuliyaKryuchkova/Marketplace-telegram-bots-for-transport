@@ -58,16 +58,29 @@ class AbstractBotSerializer(serializers.ModelSerializer):
             category_id = self.context['request'].query_params.get(
                 'categories')
             if category_id:
+                # Получаем скидку для указанной категории
                 banner_category = BannerCategory.objects.get(
                     category_id=category_id)
                 discount = banner_category.discount
             else:
-                discount = BannerCategory.objects.aggregate(Max('discount'))[
-                    'discount__max']
-            if discount is None:
-                discount = 0
+                # Получаем скидки для категорий, к которым относится бот
+                discounts = BannerCategory.objects.filter(
+                    id__in=obj.categories.values_list('id', flat=True),
+                    discount__isnull=False
+                )
+                if discounts.exists():
+                    discount = discounts.aggregate(Max('discount'))[
+                        'discount__max']
+                else:
+                    # Если категорий со скидками нет, то устанавливаем скидку 0
+                    discount = 0
         except BannerCategory.DoesNotExist:
             discount = 0
+        if discount is None or not obj.categories.exists():
+            discount = 0
+        if obj.categories.count() == 1 and hasattr(obj.categories.first(),
+                                                   'discounts_category'):
+            discount = obj.categories.first().discounts_category.discount
         return math.ceil(discount)
 
     def get_amount_discounts_sum(self, obj):
