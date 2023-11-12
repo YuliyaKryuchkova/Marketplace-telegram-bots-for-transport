@@ -10,4 +10,4 @@ RUN pip install -r requirements.txt --no-cache-dir
 
 COPY . .
 
-CMD ["gunicorn", "--bind", "0.0.0.0:8000", "bots_for_transport.wsgi"]
+CMD ["gunicorn", "--bind", "0.0.0.0:8000", "--log-level", "DEBUG", "--timeout", "60", "bots_for_transport.wsgi"]
